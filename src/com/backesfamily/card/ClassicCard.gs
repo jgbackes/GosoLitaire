@@ -22,7 +22,7 @@ public class ClassicCard extends Card {
   private var _suit: Suit
   private var _value: Value
   private var _imageName: String
-  private var _isLegal: boolean
+  private var _isLegal: boolean as Legal
   private var _image: Image
 
   public construct(card: ClassicCard) {
@@ -53,14 +53,6 @@ public class ClassicCard extends Card {
     } else {
       this.turnFaceUp()
     }
-  }
-
-  public property get Legal(): boolean {
-    return _isLegal
-  }
-
-  public property set Legal(isLegal: boolean): void {
-    this._isLegal = isLegal
   }
 
   public property get Color(): Color {
