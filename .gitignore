@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
+=======
+>>>>>>> 67db19e8c905d8eccc5e84b8efed4d0aa5b1b446
 # Compiled class file
 *.class
 
@@ -23,6 +26,9 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+<<<<<<< HEAD
 
 out/
 .idea/
+=======
+>>>>>>> 67db19e8c905d8eccc5e84b8efed4d0aa5b1b446
