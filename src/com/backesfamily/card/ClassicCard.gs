@@ -126,7 +126,6 @@ public class ClassicCard extends Card {
             , Size.width
             , Size.height
             , null)
-        print("Card Back")
       }
     } else {
       var cardFront= _images.get(_imageName)
