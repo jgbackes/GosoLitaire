@@ -3,7 +3,6 @@ package com.backesfamily.gosulitaire.stack
 uses com.backesfamily.gosulitaire.card.ClassicCard
 uses java.awt.Graphics
 uses com.backesfamily.gosulitaire.card.Card
-uses com.backesfamily.gosulitaire.stack.Directions
 
 class WasteStack extends DefaultMutableStack {
 

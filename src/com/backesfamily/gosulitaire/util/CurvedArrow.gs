@@ -50,29 +50,6 @@ public class CurvedArrow {
       return path
     }
 
-  public property get ControlMarks() : GeneralPath {
-      var path = new GeneralPath(GeneralPath.WIND_NON_ZERO)
-      var controlX = getControllingX(_startingPoint.X, _endingPoint.X)
-      var controlY = getControllingY(_startingPoint.Y, _endingPoint.Y)
-      path.moveTo(controlX, controlY - 10)
-      path.lineTo(controlX, controlY + 10)
-      path.moveTo(controlX - 10, controlY)
-      path.lineTo(controlX + 10, controlY)
-      path.moveTo(controlX, controlY)
-
-      return path
-    }
-
-  public property get ThetaVector() : GeneralPath {
-        var path = new GeneralPath(GeneralPath.WIND_NON_ZERO)
-        var controlX = getControllingX(_startingPoint.X, _endingPoint.X)
-        var controlY = getControllingY(_startingPoint.Y, _endingPoint.Y)
-        path.moveTo(controlX, controlY)
-        path.lineTo(_endingPoint.X, _endingPoint.Y)
-
-        return path
-    }
-
   public function getControllingX(startingX: double, endingX: double) : double {
     var midX = ( endingX + startingX ) / 2
     return startingX == endingX ? midX + Card.CardWidth : midX

@@ -4,7 +4,6 @@ uses com.backesfamily.gosulitaire.card.ClassicCard
 uses com.backesfamily.gosulitaire.card.Value
 uses java.awt.Graphics
 uses com.backesfamily.gosulitaire.card.Card
-uses com.backesfamily.gosulitaire.stack.Directions
 
 /**
  * The tableau is at the bottom of the table, it consists of seven stacks of cards

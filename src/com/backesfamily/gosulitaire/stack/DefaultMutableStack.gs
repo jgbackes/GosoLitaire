@@ -1,7 +1,6 @@
 package com.backesfamily.gosulitaire.stack
 
 uses com.backesfamily.gosulitaire.card.Card
-uses com.backesfamily.gosulitaire.stack.Directions
 uses java.awt.Point
 uses java.awt.Rectangle
 uses java.awt.Graphics
@@ -31,10 +30,6 @@ public class DefaultMutableStack implements Stack {
 
   override public property get Count() : int {
     return _cards.Count
-  }
-
-  override public property get CountFaceDown() : int {
-    return _cards.where( \ elt -> elt.FaceDown).Count
   }
 
   override public property get Empty(): boolean {
@@ -91,7 +86,6 @@ public class DefaultMutableStack implements Stack {
         default:
           throw new RuntimeException("Unknown direction ${SpreadDirection}!")
     }
-    print("Push " + c + NextCardLocation)
   }
 
   override public function push(theStack: Stack): void {
@@ -130,16 +124,6 @@ public class DefaultMutableStack implements Stack {
     return card
   }
 
-  override public function pop(n: int): Stack {
-    var tempStack = new DefaultMutableStack(SpreadDirection, SpreadDelta)
-    var i = n
-    while (i > 0 and !Empty) {
-      tempStack.push(pop())
-      i--
-    }
-    return tempStack
-  }
-
   override public function pop(theCard: Card): Stack {
     var tempStack = new DefaultMutableStack (SpreadDirection, SpreadDelta)
     while (!(Top == theCard) and !Empty) {
@@ -149,19 +133,6 @@ public class DefaultMutableStack implements Stack {
       tempStack.push(pop())
     }
     return tempStack
-  }
-
-  /**
-   * remove all of the elements from the stack
-  */
-  override public function clear() {
-    while (!Empty) {
-      pop()
-    }
-  }
-
-  override public function containsItem(c: Card): boolean {
-    return Cards.contains(c)
   }
 
   override public function containsPoint(p: Point): boolean {
@@ -212,10 +183,6 @@ public class DefaultMutableStack implements Stack {
     return (rect?.contains(p))
   }
 
-  override public function isValid(c: Card): boolean {
-    return (true)
-  }
-
   override public function isValid(c: Stack): boolean {
     return (true)
   }
@@ -224,14 +191,11 @@ public class DefaultMutableStack implements Stack {
     if (Empty) {
       paintEmptyStack(g)
     } else {
-      Cards.each(\ card -> {
-        card.paint(g, hint)
-        print(card.toString())
-      })
+      Cards.each(\ card -> card.paint(g, hint))
     }
   }
 
-  override public function paintEmptyStack(g: Graphics) {
+  override public function paintEmptyStack(g: Graphics): void {
     var loc = StackLocation
     g.setColor(Color.CYAN)
     g.fillRect(loc.x, loc.y, Card.CardWidth, Card.CardHeight)

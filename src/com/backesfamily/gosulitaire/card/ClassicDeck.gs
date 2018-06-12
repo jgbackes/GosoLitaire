@@ -11,12 +11,10 @@ public class ClassicDeck extends Deck {
   }
 
   protected final function buildCards(): void {
-    Suit.values().each(\suit -> {
-      Value.values().each(\value -> {
+    Suit.values().each(\suit -> Value.values().each(\value -> {
         var card = new ClassicCard(value, suit)
         push(card)
-      })
-    })
+      }))
   }
 
   override public function paintEmptyStack(g: Graphics): void {

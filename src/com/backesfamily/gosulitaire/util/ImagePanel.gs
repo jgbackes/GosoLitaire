@@ -10,7 +10,6 @@ uses java.lang.Math
 
 public class ImagePanel extends Panel  {
 
-  private var _isImageLoaded: boolean
   private var _image: Image
   private var _offScreenImage: Image
   private var _offScreenGraphics: Graphics
@@ -46,7 +45,6 @@ public class ImagePanel extends Panel  {
 
   public property set Image(image : Image) : void {
     _image = image
-    _isImageLoaded = false
     repaint()
   }
 
@@ -66,7 +64,7 @@ public class ImagePanel extends Panel  {
         g.drawString(str, x, y)
         return
       }
-      _isImageLoaded = true
+
       var dimension= getSize()
       var imageWidth= _image.getWidth(this)
       var imageHeight= _image.getHeight(this)
@@ -75,14 +73,4 @@ public class ImagePanel extends Panel  {
       g.drawImage(_image, x, y, this)
     }
   }
-
-  //public function isImageLoaded() : boolean {
-   // return (_isImageLoaded)
-  //}
-
-//  public function destroy() : void {
-//    if (_offScreenGraphics != null) {
-//      _offScreenGraphics.dispose()
-//    }
-//  }
 }

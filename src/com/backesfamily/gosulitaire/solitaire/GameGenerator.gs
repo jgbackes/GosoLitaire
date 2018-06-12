@@ -16,19 +16,19 @@ class GameGenerator {
   public function generateEndGame() {
     _stackProvider.FoundationStacks.each(\elt -> {
       while (elt.Count > 0) {
-        var card = elt.pop()
+        elt.pop()
       }
     })
     _stackProvider.TableauStacks.each(\elt -> {
       while (elt.Count > 0) {
-        var card = elt.pop()
+        elt.pop()
       }
     })
     while (_stackProvider.Deck.Count > 0) {
-      var card = _stackProvider.Deck.pop()
+      _stackProvider.Deck.pop()
     }
     while (_stackProvider.WasteStack.Count > 0) {
-      var card = _stackProvider.WasteStack.pop()
+      _stackProvider.WasteStack.pop()
     }
 
     // Fill every foundation as required to win

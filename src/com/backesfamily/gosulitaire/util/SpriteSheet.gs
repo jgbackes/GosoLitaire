@@ -30,10 +30,6 @@ class SpriteSheet {
     return sprite
   }
 
-  public function isCached() : boolean {
-    return _cached and _cachedImages != null
-  }
-
   public function getCachedSprite(x:int, y:int) : BufferedImage {
     return _cachedImages[x][y]
   }

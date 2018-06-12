@@ -29,7 +29,7 @@ public class FrameAbout extends Frame {
     Layout = new CardLayout()
     aboutPanel = new Panel(new BorderLayout())
     aboutPanel.setBackground(Color.white)
-    picturePanel = new ImagePanel(BufferedImageLoader.getBufferedImageFromRelativePathToClass("logo.jpg", getClass()))
+    picturePanel = new ImagePanel(BufferedImageLoader.getBufferedImageFromRelativePathToClass("logo.png", getClass()))
     bottomPanel = new Panel(new BorderLayout())
     buttonsPanel = new Panel(new BorderLayout())
     showCreditsButton = new Button()

@@ -171,7 +171,7 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
 
     menuItemHint = new CheckboxMenuItem("Hint")
     menuItemHint.setShortcut(new MenuShortcut(KeyEvent.VK_H, false))
-    menuItemHint.setState(false)
+    menuItemHint.setState(true)
     menuItemHint.addItemListener(\ menuEvent -> {
       if (_table != null) {
         _table.repaint()
@@ -229,7 +229,7 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
     addWindowListener(new SolitaireWindowManager(this))
     var scrollPane = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED)
     scrollPane.add("Center", _table)
-    //scrollPane.add(new Sparkle())
+    scrollPane.add(new Sparkle())
     add(scrollPane)
     newGame()
   }

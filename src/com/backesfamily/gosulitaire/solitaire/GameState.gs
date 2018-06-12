@@ -99,12 +99,7 @@ public class GameState  {
 
   public function legalMoves(hintLocations: ArrayList<Hint>, logLevel : LogLevel) : ArrayList<GameState> {
     var legalGameStates = new ArrayList<GameState>()
-    // var currentCard : ClassicCard
     var classicCard : ClassicCard
-    var originalStack : DefaultMutableStack
-    // var currStack : DefaultMutableStack
-    // var sourceStack : DefaultMutableStack
-    // var destinationStack : DefaultMutableStack
     this._logLevel = logLevel
 
     hintLocations.clear()

@@ -26,8 +26,6 @@ class MouseManager extends MouseInputAdapter {
   private var _horizontalSpeed: double as HorizontalSpeed
   private var _verticalSpeed: double as VerticalSpeed
   private var _horizontalDirection: double as HorizontalDirection
-  private var _verticalDirection: double as VerticalDirection
-  private var _hintLocations= new ArrayList<Hint>()
   private var _moveTimer : Timer
 
   construct(theStackProvider: StackProvider) {
@@ -167,7 +165,6 @@ class MouseManager extends MouseInputAdapter {
                 hint.StartingPoint = point
                 _horizontalDirection = _lastPoint.X > mousePoint.X ? -1 : 1
                 _horizontalSpeed = Math.max(Math.abs(_lastPoint.X - mousePoint.X), _horizontalSpeed)
-                _verticalDirection = _lastPoint.Y > mousePoint.Y ? -1 : 1
                 _verticalSpeed = Math.max(Math.abs(_lastPoint.Y - mousePoint.Y), _verticalSpeed)
                 hint.startFeedback(this, e.Component)
               }

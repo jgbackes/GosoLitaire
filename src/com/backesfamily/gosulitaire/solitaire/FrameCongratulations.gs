@@ -37,7 +37,7 @@ public class FrameCongratulations extends JFrame  {
     setSize(wide, high)
     add(BorderLayout.CENTER, _congratulations)
     addWindowListener(new WindowManager(this, WindowManager.HIDE_ON_CLOSE))
-    for (i in 0..3) {
+    for (0..3) {
       var sparkle = new Sparkle()
       sparkle.setBounds(0,0,wide,high)
       add(sparkle)

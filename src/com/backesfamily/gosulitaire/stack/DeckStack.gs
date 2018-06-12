@@ -4,7 +4,6 @@ uses java.awt.Graphics
 uses com.backesfamily.gosulitaire.card.ClassicCard
 uses com.backesfamily.gosulitaire.card.Card
 uses com.backesfamily.gosulitaire.card.ClassicDeck
-uses com.backesfamily.gosulitaire.stack.Directions
 
 class DeckStack extends ClassicDeck {
 

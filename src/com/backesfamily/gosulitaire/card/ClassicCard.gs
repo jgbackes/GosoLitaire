@@ -1,21 +1,14 @@
 package com.backesfamily.gosulitaire.card
 
 uses com.backesfamily.gosulitaire.util.BufferedImageLoader
-
-uses java.awt.Color
-uses java.awt.Image
-uses java.awt.Graphics
-uses java.awt.geom.RoundRectangle2D
-uses java.lang.InterruptedException
-uses java.lang.StringBuffer
-uses java.util.Hashtable
-uses com.backesfamily.gosulitaire.util.SpriteSheetInfo
 uses com.backesfamily.gosulitaire.util.SpriteSheet
-uses java.util.Locale
+uses com.backesfamily.gosulitaire.util.SpriteSheetInfo
+
+uses java.awt.*
+uses java.awt.geom.RoundRectangle2D
 
 public class ClassicCard extends Card {
   public static final var STRING_HIDDEN: String = "X"
-  public static final var CARD_COLOR: Color = Color.blue
 
   private static var _images : Hashtable <String, Image>
 
@@ -179,7 +172,6 @@ public class ClassicCard extends Card {
     loadAnImage("Foundation")
     loadAnImage("Deck")
     loadAnImage("Tableau")
-    loadAnImage("Table")
     loadAnImage("Waste")
     try {
     } catch (e: InterruptedException) {
@@ -196,10 +188,6 @@ public class ClassicCard extends Card {
 
   public static property get TableauCard(): Image {
     return _images.get("Tableau")
-  }
-
-  public static property get TableImage(): Image {
-    return _images.get("Table")
   }
 
   public static property get WasteCard() : Image {
