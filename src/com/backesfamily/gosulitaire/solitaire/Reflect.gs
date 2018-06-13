@@ -1,30 +1,38 @@
 package com.backesfamily.gosulitaire.solitaire
 
-uses java.lang. *
-uses java.awt. *
-uses java.awt.image. *
-uses java.io. *
-uses javax.imageio. *
-uses javax.swing. *
+uses javax.imageio.ImageIO
+uses javax.swing.*
+uses java.awt.*
+uses java.awt.image.BufferedImage
+uses java.io.File
 
 public class Reflect extends JComponent {
 
-  private var _image: BufferedImage
+  private var _image : BufferedImage
 
   public construct() {
     try {
       _image = ImageIO.read(new File("C:\\p4\\dev-training\\javasol\\img\\com\\backesfamily\\card\\Back.png"))
-    } catch (e: Exception) {
+    } catch (e : Exception) {
       e.printStackTrace()
     }
   }
 
-  override public function paintComponent(g: Graphics): void {
-    var g2d= g as Graphics2D
-    var width= getWidth()
-    var height= getHeight()
-    var imageWidth= _image.getWidth()
-    var imageHeight= _image.getHeight()
+  public static function main(args : String[]) : void {
+    var f = new JFrame()
+    f.setPreferredSize(new Dimension(500, 500))
+    var r = new Reflect()
+    f.getContentPane().add(r)
+    f.pack()
+    f.Visible = true
+  }
+
+  override public function paintComponent(g : Graphics) : void {
+    var g2d = g as Graphics2D
+    var width = getWidth()
+    var height = getHeight()
+    var imageWidth = _image.getWidth()
+    var imageHeight = _image.getHeight()
     var gap = 20
     var opacity = 0.4f
     var fadeHeight = 0.3f
@@ -33,9 +41,9 @@ public class Reflect extends JComponent {
     g2d.translate((width - imageWidth) / 2, height / 2 - imageHeight)
     doDrawing(g2d)
     g2d.translate(0, 2 * imageHeight + gap)
-    g2d.scale(1, - 1)
+    g2d.scale(1, -1)
     var reflection = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB)
-    var rg= reflection.createGraphics()
+    var rg = reflection.createGraphics()
     doDrawing(rg)
     rg.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_IN))
     rg.setPaint(new GradientPaint(0
@@ -51,14 +59,5 @@ public class Reflect extends JComponent {
 
   private function doDrawing(g2d : Graphics2D) {
     g2d.drawRenderedImage(_image, null)
-  }
-
-  public static function main(args: String[]): void {
-    var f = new JFrame()
-    f.setPreferredSize(new Dimension(500,500))
-    var r = new Reflect()
-    f.getContentPane().add(r)
-    f.pack()
-    f.Visible = true
   }
 }

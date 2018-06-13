@@ -1,15 +1,16 @@
 package com.backesfamily.gosulitaire.util
 
-uses java.awt.image.BufferedImage
 uses com.backesfamily.gosulitaire.card.ClassicCard
+
+uses java.awt.image.BufferedImage
 
 class SpriteSheet {
   private var _spriteSheetInfo : SpriteSheetInfo
-  private var _spriteSheet: BufferedImage
-  private var _cachedImages: BufferedImage[][]
-  private var _cached: boolean
+  private var _spriteSheet : BufferedImage
+  private var _cachedImages : BufferedImage[][]
+  private var _cached : boolean
 
-  construct(fileName: String, spriteSheetInfo: SpriteSheetInfo, cached: boolean) {
+  construct(fileName : String, spriteSheetInfo : SpriteSheetInfo, cached : boolean) {
     _cached = cached
     _spriteSheetInfo = spriteSheetInfo
     _spriteSheet = BufferedImageLoader.getBufferedImageFromRelativePathToClass(fileName, ClassicCard)
@@ -30,7 +31,7 @@ class SpriteSheet {
     return sprite
   }
 
-  public function getCachedSprite(x:int, y:int) : BufferedImage {
+  public function getCachedSprite(x : int, y : int) : BufferedImage {
     return _cachedImages[x][y]
   }
 }

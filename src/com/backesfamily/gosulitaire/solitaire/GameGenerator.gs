@@ -2,12 +2,13 @@ package com.backesfamily.gosulitaire.solitaire
 
 uses com.backesfamily.gosulitaire.card.ClassicCard
 uses com.backesfamily.gosulitaire.card.ClassicDeck
-uses com.backesfamily.gosulitaire.stack.StackProvider
 uses com.backesfamily.gosulitaire.stack.Directions
+uses com.backesfamily.gosulitaire.stack.StackProvider
 
 class GameGenerator {
 
   private var _stackProvider : StackProvider
+
   construct(stackProvider : StackProvider) {
     _stackProvider = stackProvider
   }
@@ -33,7 +34,7 @@ class GameGenerator {
 
     // Fill every foundation as required to win
     var classicDeck = new ClassicDeck(Directions.SPREAD_NONE, 0)
-    classicDeck.Cards.each( \ card -> {
+    classicDeck.Cards.each(\card -> {
       var classicCard = card as ClassicCard
       var value = classicCard.Suit.Ordinal
       classicCard.turnFaceUp()

@@ -2,51 +2,45 @@ package com.backesfamily.gosulitaire.solitaire
 
 uses com.backesfamily.gosulitaire.card.*
 uses com.backesfamily.gosulitaire.stack.*
+uses com.backesfamily.gosulitaire.stack.Stack
 
-uses java.awt.Point
-uses java.awt.Rectangle
+uses java.awt.*
 
-uses java.util.ArrayList
+public class GameState {
 
-public class GameState  {
+  protected var _gameInfo : GameInfo
+  protected var _deck : ClassicDeck
+  protected var _wasteStack : WasteStack
+  protected var _tableauStacks : TableauStack[]
+  protected var _foundationStacks : FoundationStack[]
+  protected var _logLevel : LogLevel
+  protected var _sourceStack : DefaultMutableStack
+  protected var _destinationStack : DefaultMutableStack
+  protected var _currentStack : DefaultMutableStack
+  protected var _table : Table
 
-  protected var _gameInfo: GameInfo
-  protected var _deck: ClassicDeck
-  protected var _wasteStack: WasteStack
-  protected var _tableauStacks: TableauStack[]
-  protected var _foundationStacks: FoundationStack[]
-  protected var _logLevel: LogLevel
-  protected var _sourceStack: DefaultMutableStack
-  protected var _destinationStack: DefaultMutableStack
-  protected var _currentStack: DefaultMutableStack
-  protected var _table: Table
-
-  public enum LogLevel {
-    VERBOSE_LOGGING, NOT_VERBOSE_LOGGING
-  }
-
-  public construct(gameInfo: GameInfo, deck: ClassicDeck, wasteStack: DefaultMutableStack
-                   , tableauStack : TableauStack[], foundationStack : FoundationStack[]
-                   , sourceStack: DefaultMutableStack, destinationStack: DefaultMutableStack, currentStack: DefaultMutableStack
-                   , table:Table) {
+  public construct(gameInfo : GameInfo, deck : ClassicDeck, wasteStack : DefaultMutableStack
+      , tableauStack : TableauStack[], foundationStack : FoundationStack[]
+      , sourceStack : DefaultMutableStack, destinationStack : DefaultMutableStack, currentStack : DefaultMutableStack
+      , table : Table) {
     this._gameInfo = new GameInfo(gameInfo.Type, gameInfo.Seed)
 
     this._deck = new ClassicDeck(Directions.SPREAD_NONE, 0)
-    deck.Cards.each( \ card -> _deck.push(new ClassicCard(card as ClassicCard)))
+    deck.Cards.each(\card -> _deck.push(new ClassicCard(card as ClassicCard)))
 
     this._wasteStack = new WasteStack(Directions.SPREAD_NONE, 0)
-    wasteStack.Cards.each( \ card -> _wasteStack.push(new ClassicCard(card as ClassicCard)))
+    wasteStack.Cards.each(\card -> _wasteStack.push(new ClassicCard(card as ClassicCard)))
 
     this._tableauStacks = new TableauStack[Solitaire.TABLEAU_STACK_COUNT]
-    tableauStack.eachWithIndex( \ stack, i -> {
+    tableauStack.eachWithIndex(\stack, i -> {
       _tableauStacks[i] = new TableauStack(Directions.SPREAD_SOUTH, Card.VerticalOffset)
-      stack.Cards.each( \ card -> _tableauStacks[i].push(new ClassicCard(card as ClassicCard)))
+      stack.Cards.each(\card -> _tableauStacks[i].push(new ClassicCard(card as ClassicCard)))
     })
 
     this._foundationStacks = new FoundationStack[Solitaire.FOUNDATION_STACK_COUNT]
-    foundationStack.eachWithIndex( \ stack, i -> {
+    foundationStack.eachWithIndex(\stack, i -> {
       _foundationStacks[i] = new FoundationStack(Directions.SPREAD_NONE, 0)
-      stack.Cards.each( \ card -> _foundationStacks[i].push(new ClassicCard(card as ClassicCard)))
+      stack.Cards.each(\card -> _foundationStacks[i].push(new ClassicCard(card as ClassicCard)))
     })
 
     this._sourceStack = sourceStack
@@ -55,12 +49,12 @@ public class GameState  {
     this._table = table
   }
 
-  public construct(gameInfo: GameInfo
-                   , deck: ClassicDeck
-                   , wasteStack: WasteStack
-                   , tableauStack: TableauStack[]
-                   , foundationStack: FoundationStack[]
-                   , table:Table) {
+  public construct(gameInfo : GameInfo
+      , deck : ClassicDeck
+      , wasteStack : WasteStack
+      , tableauStack : TableauStack[]
+      , foundationStack : FoundationStack[]
+      , table : Table) {
     this._gameInfo = gameInfo
     this._deck = deck
     this._wasteStack = wasteStack
@@ -97,18 +91,26 @@ public class GameState  {
     return true
   }
 
-  public function legalMoves(hintLocations: ArrayList<Hint>, logLevel : LogLevel) : ArrayList<GameState> {
+  public function legalMoves(hintLocations : ArrayList<Hint>, logLevel : LogLevel) : ArrayList<GameState> {
     var legalGameStates = new ArrayList<GameState>()
     var classicCard : ClassicCard
     this._logLevel = logLevel
 
     hintLocations.clear()
-    _tableauStacks.each( \ stack -> stack.Cards.each( \ card -> {(card as ClassicCard).Legal=false}))
-    _foundationStacks.each( \ stack -> stack.Cards.each( \ card -> {(card as ClassicCard).Legal = false}))
-    _wasteStack.Cards.each( \ card -> {(card as ClassicCard).Legal=false})
-    _deck.Cards.each( \ card -> {(card as ClassicCard).Legal=false})
+    _tableauStacks.each(\stack -> stack.Cards.each(\card -> {
+      (card as ClassicCard).Legal = false
+    }))
+    _foundationStacks.each(\stack -> stack.Cards.each(\card -> {
+      (card as ClassicCard).Legal = false
+    }))
+    _wasteStack.Cards.each(\card -> {
+      (card as ClassicCard).Legal = false
+    })
+    _deck.Cards.each(\card -> {
+      (card as ClassicCard).Legal = false
+    })
 
-    _tableauStacks.eachWithIndex( \ tableauStack, i -> {
+    _tableauStacks.eachWithIndex(\tableauStack, i -> {
       var j = tableauStack.FirstFaceUp
       if (j != -1) {
         classicCard = (tableauStack.elementAt(j) as ClassicCard)
@@ -136,8 +138,7 @@ public class GameState  {
     return legalGameStates
   }
 
-
-  private function legalTableauToTableau(card: ClassicCard, tableauNumber: int, hintLocations: ArrayList<Hint>) : void {
+  private function legalTableauToTableau(card : ClassicCard, tableauNumber : int, hintLocations : ArrayList<Hint>) : void {
     if (card.Value == Value.V_ACE) {
       return
     }
@@ -149,15 +150,15 @@ public class GameState  {
         if (destinationStack != null and destinationStack.isValid(faceUpStack)) {
           if (sourceStack.Empty or (!sourceStack.Empty and sourceStack.Top.FaceDown)) {
             if (!(sourceStack.Empty and destinationStack.Empty)) {
-              var movableCard= (faceUpStack.elementAt(faceUpStack.Count - 1) as ClassicCard)
+              var movableCard = (faceUpStack.elementAt(faceUpStack.Count - 1) as ClassicCard)
               if (_logLevel == LogLevel.VERBOSE_LOGGING) {
                 print("Legal Move " + movableCard.Value + movableCard.Suit + " To Tableau Stack " + destinationStack)
               }
-              movableCard.Legal=true
+              movableCard.Legal = true
               var sourceX = sourceStack.StackLocation.x
               var sourceY = (sourceStack.StackLocation.y - Card.CardHeight)
-                  sourceY += sourceStack.Count * Card.VerticalOffset
-                  sourceY += faceUpStack.Count == 1 ? Card.CardHeight / 2 : Card.VerticalOffset / 2
+              sourceY += sourceStack.Count * Card.VerticalOffset
+              sourceY += faceUpStack.Count == 1 ? Card.CardHeight / 2 : Card.VerticalOffset / 2
               var destinationX = destinationStack.StackLocation.x
               var destinationY = destinationStack.StackLocation.y + ((destinationStack.Count - 1) * Card.VerticalOffset)
               hintLocations.add(new Hint(
@@ -177,7 +178,7 @@ public class GameState  {
     }
   }
 
-  private function legalTableauToFoundation(legalGameStates: ArrayList <GameState>, card: ClassicCard, tableauNumber: int, hintLocations: ArrayList<Hint>) : void {
+  private function legalTableauToFoundation(legalGameStates : ArrayList<GameState>, card : ClassicCard, tableauNumber : int, hintLocations : ArrayList<Hint>) : void {
     var originalStack : Stack
     var currStack : Stack
     var sourceStack : Stack
@@ -196,7 +197,7 @@ public class GameState  {
       return
     }
 
-    _foundationStacks.each( \ destinationStack -> {
+    _foundationStacks.each(\destinationStack -> {
       if (destinationStack != null and destinationStack.isValid(originalStack)) {
         var movableCard = (originalStack.elementAt(originalStack.Count - 1) as ClassicCard)
         if (_logLevel == LogLevel.VERBOSE_LOGGING) {
@@ -209,10 +210,10 @@ public class GameState  {
         hintLocations.add(new Hint(
             new Point(movableCard.Location.x
                 , movableCard.Location.y - (Card.CardHeight / 2))
-                , destinationStack.StackLocation
-                , Hint.TABLEAU_TO_FOUNDATION
-                , new Rectangle(movableCard.Location, movableCard.Size)
-                , _table
+            , destinationStack.StackLocation
+            , Hint.TABLEAU_TO_FOUNDATION
+            , new Rectangle(movableCard.Location, movableCard.Size)
+            , _table
         ))
 
         return
@@ -225,7 +226,7 @@ public class GameState  {
 
   }
 
-  private function legalWasteToTableau(card: ClassicCard, hintLocations: ArrayList<Hint>): void {
+  private function legalWasteToTableau(card : ClassicCard, hintLocations : ArrayList<Hint>) : void {
     if (card != null) {
       _tableauStacks.each(\tableauStack -> {
         if (tableauStack.isValid(card)) {
@@ -247,7 +248,7 @@ public class GameState  {
     }
   }
 
-  private function legalWasteToFoundation(card: ClassicCard, hintLocations: ArrayList<Hint>) : void {
+  private function legalWasteToFoundation(card : ClassicCard, hintLocations : ArrayList<Hint>) : void {
     var originalStack : Stack
     var currStack : Stack
     if (this._wasteStack.Empty) {
@@ -266,7 +267,7 @@ public class GameState  {
       }
       return
     }
-    _foundationStacks.each( \foundationStack -> {
+    _foundationStacks.each(\foundationStack -> {
       if (foundationStack.isValid(originalStack)) {
         if (_logLevel == LogLevel.VERBOSE_LOGGING) {
           print("Legal Move " + card.Value + card.Suit + " To Foundation Stack " + foundationStack)
@@ -295,28 +296,32 @@ public class GameState  {
     return
   }
 
-  public function restoreGameState(gameInfo: GameInfo, deck: ClassicDeck, wasteStack: WasteStack, tableauStacks: TableauStack [], foundationStacks: FoundationStack [], move : Move) : void {
+  public function restoreGameState(gameInfo : GameInfo, deck : ClassicDeck, wasteStack : WasteStack, tableauStacks : TableauStack[], foundationStacks : FoundationStack[], move : Move) : void {
     gameInfo.Type = this._gameInfo.Type
     gameInfo.Seed = this._gameInfo.Seed
 
     wasteStack.popAll()
-    _wasteStack.Cards.each( \ card -> wasteStack.push(new ClassicCard(card as ClassicCard)))
+    _wasteStack.Cards.each(\card -> wasteStack.push(new ClassicCard(card as ClassicCard)))
 
     deck.popAll()
-    _deck.Cards.each( \ card -> deck.push(new ClassicCard(card as ClassicCard)))
+    _deck.Cards.each(\card -> deck.push(new ClassicCard(card as ClassicCard)))
 
-    _foundationStacks.eachWithIndex( \ foundationStack, i -> {
+    _foundationStacks.eachWithIndex(\foundationStack, i -> {
       foundationStacks[i].popAll()
-      foundationStack.Cards.each( \card -> foundationStacks[i].push(new ClassicCard(card as ClassicCard)))
+      foundationStack.Cards.each(\card -> foundationStacks[i].push(new ClassicCard(card as ClassicCard)))
     })
 
-    _tableauStacks.eachWithIndex( \ tableauStack, i -> {
+    _tableauStacks.eachWithIndex(\tableauStack, i -> {
       tableauStacks[i].popAll()
-      tableauStack.Cards.each( \card -> tableauStacks[i].push(new ClassicCard(card as ClassicCard)))
+      tableauStack.Cards.each(\card -> tableauStacks[i].push(new ClassicCard(card as ClassicCard)))
     })
   }
 
   override public function toString() : String {
     return (_gameInfo.toString())
+  }
+
+  public enum LogLevel {
+    VERBOSE_LOGGING, NOT_VERBOSE_LOGGING
   }
 }

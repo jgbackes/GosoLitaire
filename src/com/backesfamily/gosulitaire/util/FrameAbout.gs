@@ -1,29 +1,28 @@
 package com.backesfamily.gosulitaire.util
 
-uses java.awt. *
-uses java.util. *
+uses java.awt.*
 
 public class FrameAbout extends Frame {
-  private static final var CARD_ABOUT= "About"
-  private static final var CARD_CREDITS= "Credits"
+  private static final var CARD_ABOUT = "About"
+  private static final var CARD_CREDITS = "Credits"
 
   //private var cardLayout: CardLayout
-  private var aboutPanel: Panel
-  private var creditsPanel: Panel
-  private var versionLabel: Label
-  private var picturePanel: ImagePanel
-  private var bottomPanel: Panel
-  private var showCreditsButton: Button
-  private var creditsLabel: Label
-  private var creditsText: TextArea
-  private var hideCreditsButton: Button
-  private var buttonsPanel: Panel
-  private var authorPanel: Panel
-  private var dateLabel: Label
-  private var authorLabel: Label
-  private var emailLabel: Label
-  private var webSiteLabel: Label
-  private var resourceBundle: ResourceBundle
+  private var aboutPanel : Panel
+  private var creditsPanel : Panel
+  private var versionLabel : Label
+  private var picturePanel : ImagePanel
+  private var bottomPanel : Panel
+  private var showCreditsButton : Button
+  private var creditsLabel : Label
+  private var creditsText : TextArea
+  private var hideCreditsButton : Button
+  private var buttonsPanel : Panel
+  private var authorPanel : Panel
+  private var dateLabel : Label
+  private var authorLabel : Label
+  private var emailLabel : Label
+  private var webSiteLabel : Label
+  private var resourceBundle : ResourceBundle
 
   public construct() {
     Layout = new CardLayout()
@@ -33,7 +32,7 @@ public class FrameAbout extends Frame {
     bottomPanel = new Panel(new BorderLayout())
     buttonsPanel = new Panel(new BorderLayout())
     showCreditsButton = new Button()
-    showCreditsButton.addActionListener(\ evt -> showCredits())
+    showCreditsButton.addActionListener(\evt -> showCredits())
     buttonsPanel.add(showCreditsButton, BorderLayout.SOUTH)
     authorPanel = new Panel(new GridLayout(0, 1))
     versionLabel = new Label("", Label.RIGHT)
@@ -55,12 +54,17 @@ public class FrameAbout extends Frame {
     creditsLabel = new Label()
     creditsText = new TextArea()
     hideCreditsButton = new Button()
-    hideCreditsButton.addActionListener(\ evt -> hideCredits())
+    hideCreditsButton.addActionListener(\evt -> hideCredits())
     creditsPanel.add(creditsLabel, BorderLayout.NORTH)
     creditsPanel.add(creditsText, BorderLayout.CENTER)
     creditsPanel.add(hideCreditsButton, BorderLayout.SOUTH)
     hideCredits()
     InitializeFrame()
+  }
+
+  public static function main(args : String[]) : void {
+    var f = new FrameAbout()
+    f.Visible = true
   }
 
   private final function InitializeFrame() {
@@ -70,18 +74,18 @@ public class FrameAbout extends Frame {
     pack()
   }
 
-  override public property get Insets(): Insets {
-    var insets= super.getInsets()
-    var top= insets.top + 10
-    var right= insets.right + 10
-    var bottom= insets.bottom + 10
-    var left= insets.left + 10
+  override public property get Insets() : Insets {
+    var insets = super.getInsets()
+    var top = insets.top + 10
+    var right = insets.right + 10
+    var bottom = insets.bottom + 10
+    var left = insets.left + 10
     return (new Insets(top, right, bottom, left))
   }
 
-  override public property set Visible(visible: boolean): void {
-    var scrSize= getToolkit().getScreenSize()
-    var size= getSize()
+  override public property set Visible(visible : boolean) : void {
+    var scrSize = getToolkit().getScreenSize()
+    var size = getSize()
     if (visible) {
       setLocation((scrSize.width - size.width) / 2, (scrSize.height - size.height) / 2)
     }
@@ -89,7 +93,7 @@ public class FrameAbout extends Frame {
     super.Visible = visible
   }
 
-  override public property set Locale(locale: Locale): void {
+  override public property set Locale(locale : Locale) : void {
     super.Locale = locale
     resourceBundle = ResourceBundle.getBundle(getClass().getName() + "Ress", locale)
     showCreditsButton.setLabel(resourceBundle.getString("ShowCredits"))
@@ -104,17 +108,11 @@ public class FrameAbout extends Frame {
     Title = resourceBundle.getString("About") + " " + resourceBundle.getString("Solitaire")
   }
 
-  private function showCredits(): void {
+  private function showCredits() : void {
     (getLayout() as CardLayout).show(this, CARD_CREDITS)
   }
 
-  private function hideCredits(): void {
+  private function hideCredits() : void {
     (getLayout() as CardLayout).show(this, CARD_ABOUT)
-  }
-
-
-  public static function main(args : String[]): void {
-    var f = new FrameAbout()
-    f.Visible = true
   }
 }

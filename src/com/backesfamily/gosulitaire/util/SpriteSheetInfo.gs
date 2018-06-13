@@ -12,8 +12,8 @@ public class SpriteSheetInfo {
 
   /**
    * Default requires no margins and no gaps
-  */
-  construct(cols: int, rows: int, spriteWidth: int, spriteHeight: int) {
+   */
+  construct(cols : int, rows : int, spriteWidth : int, spriteHeight : int) {
     _cols = cols
     _rows = rows
     _width = spriteWidth
@@ -24,7 +24,7 @@ public class SpriteSheetInfo {
     _verticalGap = 0
   }
 
-  construct(cols: int, rows: int, spriteWidth: int, spriteHeight: int, westMargin:int, northMargin : int, horizontalGap : int, verticalGap : int) {
+  construct(cols : int, rows : int, spriteWidth : int, spriteHeight : int, westMargin : int, northMargin : int, horizontalGap : int, verticalGap : int) {
     _cols = cols
     _rows = rows
     _width = spriteWidth
@@ -35,11 +35,11 @@ public class SpriteSheetInfo {
     _verticalGap = verticalGap
   }
 
-  public function getX(col: int) : int {
+  public function getX(col : int) : int {
     return (col * (_width + _horizontalGap)) + _westMargin
   }
 
-  public function getY(row: int) : int {
+  public function getY(row : int) : int {
     return (row * (_height + _verticalGap)) + _northMargin
   }
 }

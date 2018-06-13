@@ -1,9 +1,10 @@
 package com.backesfamily.gosulitaire.stack
 
+uses com.backesfamily.gosulitaire.card.Card
 uses com.backesfamily.gosulitaire.card.ClassicCard
 uses com.backesfamily.gosulitaire.card.Value
-uses java.awt.Graphics
-uses com.backesfamily.gosulitaire.card.Card
+
+uses java.awt.*
 
 /**
  * The tableau is at the bottom of the table, it consists of seven stacks of cards
@@ -12,7 +13,7 @@ uses com.backesfamily.gosulitaire.card.Card
 
 class TableauStack extends DefaultMutableStack {
 
-  public construct(spreadDirection : Directions, spreadDelta: int) {
+  public construct(spreadDirection : Directions, spreadDelta : int) {
     super(spreadDirection, spreadDelta)
   }
 
@@ -20,8 +21,8 @@ class TableauStack extends DefaultMutableStack {
    * isValid will return true if a king is going onto an empty stack
    * or the top card on this stack is a different color and is one
    * greater than this card
-  */
-  public function isValid(card: ClassicCard): boolean {
+   */
+  public function isValid(card : ClassicCard) : boolean {
     var result = false
     if (Empty) {
       result = (card.Value == Value.V_KING)
@@ -32,12 +33,12 @@ class TableauStack extends DefaultMutableStack {
     return result
   }
 
-  override public function isValid(stack: Stack): boolean {
+  override public function isValid(stack : Stack) : boolean {
     return (isValid((stack.Top as ClassicCard)))
   }
 
-  override public function paintEmptyStack(g: Graphics) {
-    var location= StackLocation
+  override public function paintEmptyStack(g : Graphics) {
+    var location = StackLocation
     var foundationImage = ClassicCard.TableauCard
     g.drawImage(foundationImage
         , location.x

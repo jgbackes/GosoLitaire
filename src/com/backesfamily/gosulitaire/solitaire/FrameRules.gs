@@ -2,18 +2,12 @@ package com.backesfamily.gosulitaire.solitaire
 
 uses com.backesfamily.gosulitaire.util.WindowManager
 
-uses java.awt.Frame
-uses java.awt.TextArea
-uses java.awt.BorderLayout
-uses java.awt.Font
+uses java.awt.*
 
-uses java.util.Locale
-uses java.util.ResourceBundle
+public class FrameRules extends Frame {
 
-public class FrameRules extends Frame  {
-
-  internal var _textAreaHelp: TextArea = new TextArea("", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY)
-  private var _resBundle: ResourceBundle
+  internal var _textAreaHelp : TextArea = new TextArea("", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY)
+  private var _resBundle : ResourceBundle
 
   public construct() {
     Layout = new BorderLayout(0, 0)

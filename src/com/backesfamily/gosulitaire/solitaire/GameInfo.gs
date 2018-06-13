@@ -2,24 +2,8 @@ package com.backesfamily.gosulitaire.solitaire
 
 public class GameInfo {
 
-  public enum GameDifficulty {
-
-    RANDOM("Random", "Random"), WINNABLE_EASY("Winnable-Easy", "Easy"), WINNABLE_NORMAL("Winnable-Normal", "Normal"), WINNABLE_HARD("Winnable-Hard", "Hard"), WINNABLE_TRICKY("Winnable-Tricky", "Tricky")
-
-    private var _title : String
-
-    private construct(theTitle : String, theDifficulty : String) {
-      _title = theTitle
-    }
-
-    public property get Title() : String {
-      return _title
-    }
-  }
-
   private var _type = GameDifficulty.RANDOM
   private var _seed = -1
-
   public construct() {
   }
 
@@ -58,5 +42,20 @@ public class GameInfo {
 
   override public function toString() : String {
     return (_type + "|" + _seed)
+  }
+
+  public enum GameDifficulty {
+
+    RANDOM("Random", "Random"), WINNABLE_EASY("Winnable-Easy", "Easy"), WINNABLE_NORMAL("Winnable-Normal", "Normal"), WINNABLE_HARD("Winnable-Hard", "Hard"), WINNABLE_TRICKY("Winnable-Tricky", "Tricky")
+
+    private var _title : String
+
+    private construct(theTitle : String, theDifficulty : String) {
+      _title = theTitle
+    }
+
+    public property get Title() : String {
+      return _title
+    }
   }
 }

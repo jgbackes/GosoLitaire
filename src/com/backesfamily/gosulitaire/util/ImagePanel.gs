@@ -1,18 +1,13 @@
 package com.backesfamily.gosulitaire.util
 
+uses java.awt.*
 uses java.awt.image.BufferedImage
-uses java.awt.Panel
-uses java.awt.Image
-uses java.awt.Graphics
-uses java.awt.Dimension
 
-uses java.lang.Math
+public class ImagePanel extends Panel {
 
-public class ImagePanel extends Panel  {
-
-  private var _image: Image
-  private var _offScreenImage: Image
-  private var _offScreenGraphics: Graphics
+  private var _image : Image
+  private var _offScreenImage : Image
+  private var _offScreenGraphics : Graphics
 
   public construct() {
   }
@@ -49,7 +44,7 @@ public class ImagePanel extends Panel  {
   }
 
   override public function update(g : Graphics) : void {
-      paint(g)
+    paint(g)
   }
 
   override public function paint(g : Graphics) : void {
@@ -57,19 +52,19 @@ public class ImagePanel extends Panel  {
     if (_image != null) {
       if (!prepareImage(_image, this)) {
         var str = "Loading image..."
-        var fontMetrics= getFontMetrics(getFont())
-        var dimension= getSize()
-        var x= (dimension.width - fontMetrics.stringWidth(str)) / 2
-        var y= (dimension.height - fontMetrics.getHeight()) / 2
+        var fontMetrics = getFontMetrics(getFont())
+        var dimension = getSize()
+        var x = (dimension.width - fontMetrics.stringWidth(str)) / 2
+        var y = (dimension.height - fontMetrics.getHeight()) / 2
         g.drawString(str, x, y)
         return
       }
 
-      var dimension= getSize()
-      var imageWidth= _image.getWidth(this)
-      var imageHeight= _image.getHeight(this)
-      var x= Math.max((dimension.width - imageWidth) / 2, 0)
-      var y= Math.min((dimension.height - imageHeight) / 2, 0)
+      var dimension = getSize()
+      var imageWidth = _image.getWidth(this)
+      var imageHeight = _image.getHeight(this)
+      var x = Math.max((dimension.width - imageWidth) / 2, 0)
+      var y = Math.min((dimension.height - imageHeight) / 2, 0)
       g.drawImage(_image, x, y, this)
     }
   }

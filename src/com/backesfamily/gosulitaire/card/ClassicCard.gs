@@ -8,17 +8,17 @@ uses java.awt.*
 uses java.awt.geom.RoundRectangle2D
 
 public class ClassicCard extends Card {
-  public static final var STRING_HIDDEN: String = "X"
+  public static final var STRING_HIDDEN : String = "X"
 
-  private static var _images : Hashtable <String, Image>
+  private static var _images : Hashtable<String, Image>
 
-  private var _suit: Suit
-  private var _value: Value
-  private var _imageName: String
-  private var _isLegal: boolean as Legal
-  private var _image: Image
+  private var _suit : Suit
+  private var _value : Value
+  private var _imageName : String
+  private var _isLegal : boolean as Legal
+  private var _image : Image
 
-  public construct(card: ClassicCard) {
+  public construct(card : ClassicCard) {
     super()
     this._image = card._image
     this._imageName = card._imageName
@@ -27,7 +27,7 @@ public class ClassicCard extends Card {
     InitializeClassicCard(card)
   }
 
-  public construct(theValue: Value, theSuit: Suit) {
+  public construct(theValue : Value, theSuit : Suit) {
     super()
     this._suit = theSuit
     this._value = theValue
@@ -36,7 +36,23 @@ public class ClassicCard extends Card {
     turnFaceDown()
   }
 
-  private final function InitializeClassicCard(card: ClassicCard) {
+  public static property get FoundationCard() : Image {
+    return _images.get("Foundation")
+  }
+
+  public static property get DeckCard() : Image {
+    return _images.get("Deck")
+  }
+
+  public static property get TableauCard() : Image {
+    return _images.get("Tableau")
+  }
+
+  public static property get WasteCard() : Image {
+    return _images.get("Waste")
+  }
+
+  private final function InitializeClassicCard(card : ClassicCard) {
     if (_images == null) {
       loadCardImages(java.util.Locale.ENGLISH)
     }
@@ -48,21 +64,21 @@ public class ClassicCard extends Card {
     }
   }
 
-  public property get Color(): Color {
+  public property get Color() : Color {
     return (_suit == com.backesfamily.gosulitaire.card.Suit.SPADE or _suit == com.backesfamily.gosulitaire.card.Suit.CLUB)
         ? java.awt.Color.BLACK
         : java.awt.Color.RED
   }
 
-  public property get Value(): Value {
+  public property get Value() : Value {
     return _value
   }
 
-  public property get Suit(): Suit {
+  public property get Suit() : Suit {
     return _suit
   }
 
-  override public function equals(obj: Object): boolean {
+  override public function equals(obj : Object) : boolean {
     if (!(obj typeis ClassicCard)) {
       return false
     }
@@ -70,7 +86,7 @@ public class ClassicCard extends Card {
     return FaceDown == card.FaceDown and _suit == card._suit and _value == card._value
   }
 
-  override public function toString(): String {
+  override public function toString() : String {
     var strBufTemp = new StringBuffer()
     if (FaceDown) {
       strBufTemp.append(STRING_HIDDEN)
@@ -86,13 +102,13 @@ public class ClassicCard extends Card {
     return strBufTemp.toString()
   }
 
-  override public function paint(g: Graphics, hint: boolean): void {
-    var location= Location
-    var border= new RoundRectangle2D.Double(
-          location.x - 1
-        , location.y - 1
-        , Size.width + 1
-        , Size.height + 1
+  override public function paint(g : Graphics, hint : boolean) : void {
+    var location = Location
+    var border = new RoundRectangle2D.Double(
+        location.x - 4
+        , location.y - 4
+        , Size.width + 4
+        , Size.height + 4
         , BorderArc
         , BorderArc)
     var oldClip = g.getClipBounds()
@@ -113,7 +129,7 @@ public class ClassicCard extends Card {
             , null)
       }
     } else {
-      var cardFront= _images.get(_imageName)
+      var cardFront = _images.get(_imageName)
       if (cardFront != null) {
         g.drawImage(cardFront
             , location.x
@@ -144,24 +160,24 @@ public class ClassicCard extends Card {
         , BorderArc)
   }
 
-  public final function loadCardImages(locale: Locale) {
+  public final function loadCardImages(locale : Locale) {
     _images = new Hashtable<String, Image>()
-    var spriteSheetFileName = locale.toString()+"_Cards.png"
+    var spriteSheetFileName = locale.toString() + "_Cards.png"
     loadCardImages(spriteSheetFileName)
   }
 
-  private function loadAnImage(imageName: String) {
+  private function loadAnImage(imageName : String) {
     var theImage = BufferedImageLoader.getBufferedImageFromRelativePathToClass(imageName + ".png", ClassicCard)
     _images.put(imageName, theImage)
   }
 
-  private function loadCardImages(sprintSheetFileName: String) {
+  private function loadCardImages(sprintSheetFileName : String) {
     var spriteSheetInfo = new SpriteSheetInfo(13, 5, Card.CardWidth, Card.CardHeight)
-    var spriteSheet = new SpriteSheet(sprintSheetFileName, spriteSheetInfo,  true)
+    var spriteSheet = new SpriteSheet(sprintSheetFileName, spriteSheetInfo, true)
 
     for (i in 0..|Value.values().length) {
       for (j in 0..|Suit.values().Count) {
-        var imageName= "${Suit.values()[j].toString()}/${Value.values()[i].toString()}"
+        var imageName = "${Suit.values()[j].toString()}/${Value.values()[i].toString()}"
         var image = spriteSheet.getCachedSprite(i, j)
 
         _images.put(imageName, image)
@@ -174,23 +190,7 @@ public class ClassicCard extends Card {
     loadAnImage("Tableau")
     loadAnImage("Waste")
     try {
-    } catch (e: InterruptedException) {
+    } catch (e : InterruptedException) {
     }
-  }
-
-  public static property get FoundationCard(): Image {
-    return _images.get("Foundation")
-  }
-
-  public static property get DeckCard(): Image {
-    return _images.get("Deck")
-  }
-
-  public static property get TableauCard(): Image {
-    return _images.get("Tableau")
-  }
-
-  public static property get WasteCard() : Image {
-    return _images.get("Waste")
   }
 }

@@ -1,40 +1,35 @@
 package com.backesfamily.gosulitaire.util
 
-uses com.backesfamily.gosulitaire.card.Hint
+uses com.backesfamily.gosulitaire.card.Card
 uses com.backesfamily.gosulitaire.card.ClassicCard
 uses com.backesfamily.gosulitaire.stack.Stack
 uses com.backesfamily.gosulitaire.stack.StackProvider
-uses com.backesfamily.gosulitaire.card.Card
-
-uses java.awt.Component
-uses java.awt.geom.AffineTransform
-uses java.awt.Point
-uses java.awt.event.MouseEvent
-uses java.util.ArrayList
-uses java.lang.Math
 
 uses javax.swing.Timer
 uses javax.swing.event.MouseInputAdapter
+uses java.awt.*
+uses java.awt.event.MouseEvent
+uses java.awt.geom.AffineTransform
 
 class MouseManager extends MouseInputAdapter {
 
-  private var _stackProvider: StackProvider
+  private var _stackProvider : StackProvider
 
-  private var _sourceStack: Stack
-  private var _translation: Point
-  private var _lastPoint: Point
-  private var _horizontalSpeed: double as HorizontalSpeed
-  private var _verticalSpeed: double as VerticalSpeed
-  private var _horizontalDirection: double as HorizontalDirection
+  private var _sourceStack : Stack
+  private var _translation : Point
+  private var _lastPoint : Point
+  private var _horizontalSpeed : double as HorizontalSpeed
+  private var _verticalSpeed : double as VerticalSpeed
+  private var _horizontalDirection : double as HorizontalDirection
   private var _moveTimer : Timer
 
-  construct(theStackProvider: StackProvider) {
+  construct(theStackProvider : StackProvider) {
     _stackProvider = theStackProvider
     _sourceStack = null
   }
 
-  override public function mouseClicked(e: MouseEvent): void {
-    if ( e.ClickCount == 2) {
+  override public function mouseClicked(e : MouseEvent) : void {
+    if (e.ClickCount == 2) {
       var mousePoint = e.Point
       var card = getCardAtMousePoint(mousePoint)
       if (card != null and card.FaceDown) {
@@ -42,7 +37,7 @@ class MouseManager extends MouseInputAdapter {
         card = null
       }
       if (_sourceStack != null and card != null) {
-        var loc= card.Location
+        var loc = card.Location
         _translation = new Point(mousePoint.x - loc.x, mousePoint.y - loc.y)
         _stackProvider.CurrentStack = _sourceStack.pop(card)
         _stackProvider.CurrentStack.reverse()
@@ -62,9 +57,9 @@ class MouseManager extends MouseInputAdapter {
                 , e.PopupTrigger)
 
 
-            var pathIterator= firstHint.CurvedArrowShaftNoKnob.getPathIterator(null, 0.5);
+            var pathIterator = firstHint.CurvedArrowShaftNoKnob.getPathIterator(null, 0.5);
 
-            var coordinates= new double[6];
+            var coordinates = new double[6];
             var transform = new AffineTransform()
             transform.translate(coordinates[0], coordinates[1])
 
@@ -95,10 +90,10 @@ class MouseManager extends MouseInputAdapter {
     }
   }
 
-  override public function mousePressed(e: MouseEvent): void {
+  override public function mousePressed(e : MouseEvent) : void {
     if (!e.isMetaDown() and !e.isControlDown() and !e.isShiftDown()) {
-      var card: ClassicCard = null
-      var mousePoint= e.getPoint()
+      var card : ClassicCard = null
+      var mousePoint = e.getPoint()
 
       if (_stackProvider.Deck.containsPoint(mousePoint)) {
         _stackProvider.getNewCards()
@@ -109,7 +104,7 @@ class MouseManager extends MouseInputAdapter {
           card = null
         }
         if (_sourceStack != null and card != null) {
-          var loc= card.Location
+          var loc = card.Location
           _translation = new Point(mousePoint.x - loc.x, mousePoint.y - loc.y)
           _stackProvider.CurrentStack = _sourceStack.pop(card)
           _stackProvider.CurrentStack.reverse()
@@ -120,20 +115,20 @@ class MouseManager extends MouseInputAdapter {
     _lastPoint = e.getPoint()
   }
 
-  override public function mouseReleased(event: MouseEvent): void {
-    var point= event.getPoint()
+  override public function mouseReleased(event : MouseEvent) : void {
+    var point = event.getPoint()
     var destinationStack : Stack
 
-    _stackProvider.HintLocations.each( \ hint -> hint.stopFeedback())
+    _stackProvider.HintLocations.each(\hint -> hint.stopFeedback())
 
-    _stackProvider.TableauStacks.each( \tableauStack -> {
+    _stackProvider.TableauStacks.each(\tableauStack -> {
       if (tableauStack.containsPoint(point)) {
         destinationStack = tableauStack
         return // early out of block
       }
     })
 
-    _stackProvider.FoundationStacks.each( \foundationStack -> {
+    _stackProvider.FoundationStacks.each(\foundationStack -> {
       if (foundationStack.containsPoint(point)) {
         destinationStack = foundationStack
         return // early out of block
@@ -147,19 +142,19 @@ class MouseManager extends MouseInputAdapter {
     _stackProvider.Table.repaint()
   }
 
-  override public function mouseDragged(e: MouseEvent): void {
+  override public function mouseDragged(e : MouseEvent) : void {
     if (_stackProvider.CurrentStack != null and _translation != null) {
-      var mousePoint= e.getPoint()
+      var mousePoint = e.getPoint()
       _stackProvider.CurrentStack.StackLocation = new Point(mousePoint.x - _translation.x, mousePoint.y - _translation.y)
 
-      _stackProvider.CurrentStack.Cards.each( \card -> {
+      _stackProvider.CurrentStack.Cards.each(\card -> {
         if (card.containsPoint(mousePoint)) {
           if (_stackProvider.HintLocations.Count > 0) {
             var sourceCardLocation = _stackProvider.CurrentStack.StackLocation
             var count = _stackProvider.CurrentStack.Count
             var yLoc = sourceCardLocation.y
             yLoc -= count == 1 ? (Card.CardHeight / 2) : Card.CardHeight - Card.VerticalOffset / 2
-            var point = new Point(sourceCardLocation.x, yLoc )
+            var point = new Point(sourceCardLocation.x, yLoc)
             _stackProvider.HintLocations.each(\hint -> {
               if (_stackProvider.CurrentStack.containsPoint(mousePoint)) {
                 hint.StartingPoint = point
@@ -177,8 +172,8 @@ class MouseManager extends MouseInputAdapter {
     }
   }
 
-  private function cullHints(p:Point) {
-    _stackProvider.HintLocations.removeWhere(\ hint -> !hint.containsPoint(p))
+  private function cullHints(p : Point) {
+    _stackProvider.HintLocations.removeWhere(\hint -> !hint.containsPoint(p))
   }
 
   private function getCardAtMousePoint(mousePoint : Point) : ClassicCard {
@@ -187,14 +182,14 @@ class MouseManager extends MouseInputAdapter {
       _sourceStack = _stackProvider.WasteStack
       result = (_sourceStack.Top as ClassicCard)
     } else {
-      _stackProvider.TableauStacks.each( \tableauStack -> {
+      _stackProvider.TableauStacks.each(\tableauStack -> {
         if (tableauStack.NotEmpty and tableauStack.containsPoint(mousePoint)) {
           _sourceStack = tableauStack
           result = (_sourceStack.getClickedCard(mousePoint) as ClassicCard)
           return
         }
       })
-      _stackProvider.FoundationStacks.each( \foundationStack -> {
+      _stackProvider.FoundationStacks.each(\foundationStack -> {
         if (foundationStack.NotEmpty and foundationStack.containsPoint(mousePoint)) {
           _sourceStack = foundationStack
           result = (_sourceStack.Top as ClassicCard)

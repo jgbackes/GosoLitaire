@@ -1,13 +1,13 @@
 package com.backesfamily.gosulitaire.card
 
-uses java.awt.*
-uses java.util.*
 uses com.backesfamily.gosulitaire.stack.DefaultMutableStack
 uses com.backesfamily.gosulitaire.stack.Directions
 
+uses java.awt.*
+
 public abstract class Deck extends DefaultMutableStack {
 
-  public construct(spreadDirection : Directions, spreadDelta: int) {
+  public construct(spreadDirection : Directions, spreadDelta : int) {
     super(spreadDirection, spreadDelta)
   }
 
@@ -32,8 +32,8 @@ public abstract class Deck extends DefaultMutableStack {
     }
   }
 
-  override public function paintEmptyStack(g: Graphics) {
-    var loc= StackLocation
+  override public function paintEmptyStack(g : Graphics) {
+    var loc = StackLocation
     g.setColor(Color.YELLOW)
     g.fillRect(loc.x, loc.y, Card.CardWidth, Card.CardHeight)
     g.setColor(Color.black)

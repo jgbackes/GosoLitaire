@@ -1,18 +1,13 @@
 package com.backesfamily.gosulitaire.util
 
-uses java.awt.Panel
-uses java.awt.Dialog
-uses java.awt.TextArea
-uses java.awt.Frame
-uses java.awt.BorderLayout
-uses java.awt.Color
+uses java.awt.*
 
-public class DialogMsg extends Dialog  {
+public class DialogMsg extends Dialog {
 
   internal var panelBackground : Panel
   internal var textAreaMsg : TextArea
 
-  public construct(parent : Frame, title : String, modal : boolean, message: String) {
+  public construct(parent : Frame, title : String, modal : boolean, message : String) {
     super(parent, modal)
     Layout = new BorderLayout(0, 0)
     Visible = false

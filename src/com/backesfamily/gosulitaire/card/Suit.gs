@@ -1,6 +1,6 @@
 package com.backesfamily.gosulitaire.card
 
-public enum Suit  {
+public enum Suit {
 
   HEART("H"), SPADE("S"), DIAMOND("D"), CLUB("C")
 

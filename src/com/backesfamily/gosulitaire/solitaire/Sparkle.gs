@@ -1,31 +1,24 @@
 package com.backesfamily.gosulitaire.solitaire
 
-uses java.awt.Color
-uses java.awt.Graphics
-uses java.awt.Graphics2D
-uses java.awt.geom.Path2D
-uses java.awt.geom.GeneralPath
-uses java.awt.geom.AffineTransform
-
-uses java.lang.Math
-
-uses java.util.ArrayList
-
-uses javax.swing.JComponent
+uses javax.swing.*
 uses javax.swing.Timer
+uses java.awt.*
+uses java.awt.geom.AffineTransform
+uses java.awt.geom.GeneralPath
+uses java.awt.geom.Path2D
 
 class Sparkle extends JComponent {
 
   private var _paths : ArrayList<Path2D>
-  private var _script : int[][] = {{0},{0}, {3}, {2}, {2}, {1,6}, {1,6}, {3,5}, {3,5}, {4}, {4}}
+  private var _script : int[][] = {{0}, {0}, {3}, {2}, {2}, {1, 6}, {1, 6}, {3, 5}, {3, 5}, {4}, {4}}
   private var _colors : Color[] = {Color.RED, Color.YELLOW, Color.CYAN, Color.BLUE, Color.GREEN, Color.WHITE, Color.ORANGE, Color.PINK, Color.MAGENTA}
-  private var _timer: Timer
-  private var _frame: int
-  private var _xPosition: int
-  private var _yPosition: int
-  private var _scale: double
-  private var _rotation: double
-  private var _color: Color
+  private var _timer : Timer
+  private var _frame : int
+  private var _xPosition : int
+  private var _yPosition : int
+  private var _scale : double
+  private var _rotation : double
+  private var _color : Color
 
   public construct() {
     _xPosition = 0
@@ -39,7 +32,7 @@ class Sparkle extends JComponent {
     initTimer()
   }
 
-  private function initTimer(): void {
+  private function initTimer() : void {
     _timer = new Timer(19, \evt -> {
       _frame++
       if (_frame >= _script.Count) {
@@ -52,7 +45,7 @@ class Sparkle extends JComponent {
       }
       repaint()
     })
-    _timer.InitialDelay=(Math.random() * 20.0) as int
+    _timer.InitialDelay = (Math.random() * 20.0) as int
     _timer.start()
   }
 
@@ -116,13 +109,13 @@ class Sparkle extends JComponent {
   private function createTick1() : GeneralPath {
     var path = new GeneralPath()
 
-    path.moveTo(00.0d,	00.0d)
-    path.lineTo(05.0d,	10.0d)
-    path.lineTo(10.0d,	15.0d)
-    path.lineTo(20.0d,	20.0d)
-    path.lineTo(15.0d,	10.0d)
-    path.lineTo(10.0d,	05.0d)
-    path.lineTo(00.0d,	00.0d)
+    path.moveTo(00.0d, 00.0d)
+    path.lineTo(05.0d, 10.0d)
+    path.lineTo(10.0d, 15.0d)
+    path.lineTo(20.0d, 20.0d)
+    path.lineTo(15.0d, 10.0d)
+    path.lineTo(10.0d, 05.0d)
+    path.lineTo(00.0d, 00.0d)
 
     path.moveTo(80.0d, 00.0d)
     path.lineTo(75.0d, 10.0d)
@@ -154,13 +147,13 @@ class Sparkle extends JComponent {
   private function createTick2() : GeneralPath {
     var path = new GeneralPath()
 
-    path.moveTo(05.0d,	05.0d)
-    path.lineTo(10.0d,	15.0d)
-    path.lineTo(15.0d,	20.0d)
-    path.lineTo(25.0d,	25.0d)
-    path.lineTo(20.0d,	15.0d)
-    path.lineTo(15.0d,	10.0d)
-    path.lineTo(05.0d,	05.0d)
+    path.moveTo(05.0d, 05.0d)
+    path.lineTo(10.0d, 15.0d)
+    path.lineTo(15.0d, 20.0d)
+    path.lineTo(25.0d, 25.0d)
+    path.lineTo(20.0d, 15.0d)
+    path.lineTo(15.0d, 10.0d)
+    path.lineTo(05.0d, 05.0d)
 
     path.moveTo(75.00d, 5.00d)
     path.lineTo(70.00d, 15.00d)
@@ -241,7 +234,7 @@ class Sparkle extends JComponent {
   }
 
 
-  private function doDrawing(g2d: Graphics2D): void {
+  private function doDrawing(g2d : Graphics2D) : void {
     g2d.Color = _color
     var frames = _script[_frame]
     var oldTransform = g2d.Transform
@@ -250,13 +243,13 @@ class Sparkle extends JComponent {
     at.scale(_scale, _scale)
     at.rotate(_rotation)
     g2d.Transform = at
-    for(pathID in frames) {
+    for (pathID in frames) {
       g2d.fill(_paths[pathID])
     }
     g2d.Transform = oldTransform
   }
 
-  override public function paintComponent(g: Graphics): void {
+  override public function paintComponent(g : Graphics) : void {
     super.paintComponent(g)
     doDrawing(g as Graphics2D)
   }

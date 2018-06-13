@@ -1,23 +1,23 @@
 package com.backesfamily.gosulitaire.stack
 
+uses com.backesfamily.gosulitaire.card.Card
 uses com.backesfamily.gosulitaire.card.ClassicCard
 uses com.backesfamily.gosulitaire.card.Value
-uses com.backesfamily.gosulitaire.card.Card
 
-uses java.awt.Graphics
+uses java.awt.*
 
 class FoundationStack extends DefaultMutableStack {
 
-  public construct(spreadDirection : Directions, spreadDelta: int) {
+  public construct(spreadDirection : Directions, spreadDelta : int) {
     super(spreadDirection, spreadDelta)
   }
 
-  override public function isValid(stack: Stack): boolean {
+  override public function isValid(stack : Stack) : boolean {
     var result = (stack.Count == 1 and isValid(stack.Top as ClassicCard))
     return result
   }
 
-  private function isValid(card: ClassicCard): boolean {
+  private function isValid(card : ClassicCard) : boolean {
     var result = false
     var cardValue = card.Value
     if (Empty) {
@@ -29,8 +29,8 @@ class FoundationStack extends DefaultMutableStack {
     return result
   }
 
-  override public function paintEmptyStack(g: Graphics): void {
-    var location= StackLocation
+  override public function paintEmptyStack(g : Graphics) : void {
+    var location = StackLocation
     var image = ClassicCard.FoundationCard
     g.drawImage(image
         , location.x
