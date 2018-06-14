@@ -19,7 +19,7 @@ class FoundationStack extends DefaultMutableStack {
     var result = false
     var cardValue = card.Value
     if (Empty) {
-      result = (cardValue == Value.V_ACE)
+      result = (cardValue == Pips.V_ACE)
     } else {
       var topCard = Top as ClassicCard
       result = (card.Suit == topCard.Suit and cardValue.TheValue == topCard.Value.TheValue + 1)

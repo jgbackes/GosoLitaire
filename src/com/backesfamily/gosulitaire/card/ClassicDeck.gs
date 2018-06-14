@@ -12,7 +12,7 @@ public class ClassicDeck extends Deck {
   }
 
   protected final function buildCards() : void {
-    Suit.values().each(\suit -> Value.values().each(\value -> {
+    Suit.values().each(\suit -> Pips.values().each(\value -> {
       var card = new ClassicCard(value, suit)
       push(card)
     }))

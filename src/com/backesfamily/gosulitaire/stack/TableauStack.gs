@@ -23,7 +23,7 @@ class TableauStack extends DefaultMutableStack {
   public function isValid(card : ClassicCard) : boolean {
     var result = false
     if (Empty) {
-      result = (card.Value == Value.V_KING)
+      result = (card.Value == Pips.V_KING)
     } else {
       result = (card.Color != (Top as ClassicCard).Color
           and card.Value.TheValue == (Top as ClassicCard).Value.TheValue - 1)

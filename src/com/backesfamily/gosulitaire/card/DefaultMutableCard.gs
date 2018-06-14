@@ -4,22 +4,28 @@ uses java.awt.*
 
 public abstract class DefaultMutableCard implements Card {
 
-  var _faceDown : boolean as FaceDown = false
-  var _location : Point as Location = new Point(0, 0)
-  var _size : Dimension as Size = new Dimension(Card.CardWidth, Card.CardHeight)
+  construct() {
+    FaceDown = false
+    Location = new Point(0,0)
+    Size = new Dimension(Card.CardWidth, Card.CardHeight)
+  }
+
+  private var _faceDown: boolean as FaceDown
+  private var _location: Point as Location
+  private var _size: Dimension as Size
 
   override public abstract function paint(g : Graphics, hint : boolean) : void
 
   override public final function turnFaceUp() : void {
-    _faceDown = false
+    FaceDown = false
   }
 
   override public final function turnFaceDown() : void {
-    _faceDown = true
+    FaceDown = true
   }
 
   override public function containsPoint(p : Point) : boolean {
-    var rect = new Rectangle(Location.x, Location.y, _size.width, _size.height)
+    var rect = new Rectangle(Location.x, Location.y, Size.width, Size.height)
     return (rect.contains(p))
   }
 }

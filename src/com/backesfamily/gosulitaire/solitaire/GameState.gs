@@ -139,7 +139,7 @@ public class GameState {
   }
 
   private function legalTableauToTableau(card : ClassicCard, tableauNumber : int, hintLocations : ArrayList<Hint>) : void {
-    if (card.Value == Value.V_ACE) {
+    if (card.Value == Pips.V_ACE) {
       return
     }
     var sourceStack = this._tableauStacks[tableauNumber]

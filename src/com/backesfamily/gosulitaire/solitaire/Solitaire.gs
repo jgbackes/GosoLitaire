@@ -520,7 +520,7 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
 
     override public function itemStateChanged(e : ItemEvent) : void {
       outer.Locale = locale
-      var card = new ClassicCard(Value.V_10, Suit.CLUB)
+      var card = new ClassicCard(Pips.V_10, Suit.CLUB)
       card.loadCardImages(locale)
     }
   }

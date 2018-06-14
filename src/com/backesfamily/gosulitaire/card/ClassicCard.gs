@@ -13,7 +13,7 @@ public class ClassicCard extends DefaultMutableCard {
   private static var _images : Hashtable<String, Image>
 
   private var _suit : Suit
-  private var _value : Value
+  private var _pips : Pips
   private var _imageName : String
   private var _isLegal : boolean as Legal
   private var _image : Image
@@ -23,15 +23,15 @@ public class ClassicCard extends DefaultMutableCard {
     this._image = card._image
     this._imageName = card._imageName
     this._suit = card._suit
-    this._value = card._value
+    this._pips = card._pips
     InitializeClassicCard(card)
   }
 
-  public construct(theValue : Value, theSuit : Suit) {
+  public construct(pips : Pips, suit : Suit) {
     super()
-    this._suit = theSuit
-    this._value = theValue
-    this._imageName = "${theSuit.toString()}/${theValue.toString()}"
+    this._suit = suit
+    this._pips = pips
+    this._imageName = "${suit.toString()}/${pips.toString()}"
     this._isLegal = false
     turnFaceDown()
   }
@@ -70,8 +70,8 @@ public class ClassicCard extends DefaultMutableCard {
         : java.awt.Color.RED
   }
 
-  public property get Value() : Value {
-    return _value
+  public property get Value() : Pips {
+    return _pips
   }
 
   public property get Suit() : Suit {
@@ -83,7 +83,7 @@ public class ClassicCard extends DefaultMutableCard {
       return false
     }
     var card = obj as ClassicCard
-    return FaceDown == card.FaceDown and _suit == card._suit and _value == card._value
+    return FaceDown == card.FaceDown and _suit == card._suit and _pips == card._pips
   }
 
   override public function toString() : String {
@@ -91,7 +91,7 @@ public class ClassicCard extends DefaultMutableCard {
     if (FaceDown) {
       strBufTemp.append(STRING_HIDDEN)
     }
-    strBufTemp.append(_value.toString())
+    strBufTemp.append(_pips.toString())
     strBufTemp.append(_suit.toString())
     if (FaceDown) {
       strBufTemp.append(STRING_HIDDEN)
