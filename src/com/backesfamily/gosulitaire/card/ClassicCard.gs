@@ -105,12 +105,13 @@ public class ClassicCard extends DefaultMutableCard {
   override public function paint(g : Graphics, hint : boolean) : void {
     var location = Location
     var border = new RoundRectangle2D.Double(
-        location.x - 4
-        , location.y - 4
-        , Size.width + 4
-        , Size.height + 4
+        location.x
+        , location.y
+        , Size.width
+        , Size.height
         , Card.BorderArc
         , Card.BorderArc)
+
     var oldClip = g.getClipBounds()
     g.setClip(border)
     g.setColor(java.awt.Color.white)
