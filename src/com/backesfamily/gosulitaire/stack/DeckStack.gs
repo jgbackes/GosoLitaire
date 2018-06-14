@@ -1,8 +1,6 @@
 package com.backesfamily.gosulitaire.stack
 
-uses com.backesfamily.gosulitaire.card.Card
-uses com.backesfamily.gosulitaire.card.ClassicCard
-uses com.backesfamily.gosulitaire.card.ClassicDeck
+uses com.backesfamily.gosulitaire.card.*
 
 uses java.awt.*
 
@@ -18,8 +16,8 @@ class DeckStack extends ClassicDeck {
     g.drawImage(foundationImage
         , location.x
         , location.y
-        , Card.CardWidth
-        , Card.CardHeight
+        , CardI.CardWidth
+        , CardI.CardHeight
         , null)
   }
 }

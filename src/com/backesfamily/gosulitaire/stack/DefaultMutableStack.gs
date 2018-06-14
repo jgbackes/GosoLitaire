@@ -1,6 +1,6 @@
 package com.backesfamily.gosulitaire.stack
 
-uses com.backesfamily.gosulitaire.card.Card
+uses com.backesfamily.gosulitaire.card.*
 
 uses java.awt.*
 
@@ -134,45 +134,45 @@ public class DefaultMutableStack implements Stack {
     var rect : Rectangle = null
     switch (SpreadDirection) {
       case SPREAD_NORTH:
-        var height = Card.CardHeight + (Cards.size() - 1) * SpreadDelta
+        var height = CardI.CardHeight + (Cards.size() - 1) * SpreadDelta
         rect = new Rectangle(
             _stackLocation.x - height
             , _stackLocation.y
             , height
-            , Card.CardWidth)
+            , CardI.CardWidth)
         break
 
       case SPREAD_EAST:
         rect = new Rectangle(
             _stackLocation.x
             , _stackLocation.y
-            , Card.CardWidth + (Cards.size() - 1) * SpreadDelta
-            , Card.CardHeight)
+            , CardI.CardWidth + (Cards.size() - 1) * SpreadDelta
+            , CardI.CardHeight)
         break
 
       case SPREAD_SOUTH:
         rect = new Rectangle(
             _stackLocation.x
             , _stackLocation.y
-            , Card.CardWidth
-            , Card.CardHeight + (Cards.size() - 1) * SpreadDelta)
+            , CardI.CardWidth
+            , CardI.CardHeight + (Cards.size() - 1) * SpreadDelta)
         break
 
       case SPREAD_WEST:
-        var width = Card.CardWidth + (Cards.size() - 1) * SpreadDelta
+        var width = CardI.CardWidth + (Cards.size() - 1) * SpreadDelta
         rect = new Rectangle(
             _stackLocation.x - width
             , _stackLocation.y
             , width
-            , Card.CardHeight)
+            , CardI.CardHeight)
         break
       case SPREAD_NONE:
       default:
         rect = new Rectangle(
             _stackLocation.x
             , _stackLocation.y
-            , Card.CardWidth
-            , Card.CardHeight)
+            , CardI.CardWidth
+            , CardI.CardHeight)
         break
     }
     return (rect?.contains(p))
@@ -193,9 +193,9 @@ public class DefaultMutableStack implements Stack {
   override public function paintEmptyStack(g : Graphics) {
     var loc = StackLocation
     g.setColor(Color.CYAN)
-    g.fillRect(loc.x, loc.y, Card.CardWidth, Card.CardHeight)
+    g.fillRect(loc.x, loc.y, CardI.CardWidth, CardI.CardHeight)
     g.setColor(Color.black)
-    g.drawRect(loc.x, loc.y, Card.CardWidth, Card.CardHeight)
+    g.drawRect(loc.x, loc.y, CardI.CardWidth, CardI.CardHeight)
   }
 
   override public function getClickedCard(p : Point) : Card {

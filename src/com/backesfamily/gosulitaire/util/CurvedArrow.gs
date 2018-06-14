@@ -1,6 +1,6 @@
 package com.backesfamily.gosulitaire.util
 
-uses com.backesfamily.gosulitaire.card.Card
+uses com.backesfamily.gosulitaire.card.*
 
 uses java.awt.*
 uses java.awt.geom.Ellipse2D
@@ -49,12 +49,12 @@ public class CurvedArrow {
 
   public function getControllingX(startingX : double, endingX : double) : double {
     var midX = (endingX + startingX) / 2
-    return startingX == endingX ? midX + Card.CardWidth : midX
+    return startingX == endingX ? midX + CardI.CardWidth : midX
   }
 
   public function getControllingY(startingY : double, endingY : double) : double {
     var yMax = Math.max(startingY, endingY)
-    return yMax + Card.CardHeight / 2
+    return yMax + CardI.CardHeight / 2
   }
 
   public property get ArrowHeadTheta() : double {

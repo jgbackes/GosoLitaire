@@ -20,10 +20,10 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
   public static final var FOUNDATION_STACK_COUNT : int = 4
   public static final var TABLEAU_STACK_COUNT : int = 7
   public static final var FREED_CARDS_CNT : int = 1
-  public static final var DECK_POS : Point = new Point(Card.GullySize, Card.GullySize)
-  public static final var WASTE_STACK_POSITION : Point = new Point(DECK_POS.x + Card.CardWidth + Card.GullySize, Card.GullySize)
-  public static final var FOUNDATION_STACK_POSITION : Point = new Point(WASTE_STACK_POSITION.x + (2 * (Card.CardWidth + Card.GullySize)), DECK_POS.y)
-  public static final var TABLEAU_STACK_POSITION : Point = new Point(DECK_POS.x, FOUNDATION_STACK_POSITION.y + Card.CardHeight + Card.GullySize + 400)
+  public static final var DECK_POS : Point = new Point(CardI.GullySize, CardI.GullySize)
+  public static final var WASTE_STACK_POSITION : Point = new Point(DECK_POS.x + CardI.CardWidth + CardI.GullySize, CardI.GullySize)
+  public static final var FOUNDATION_STACK_POSITION : Point = new Point(WASTE_STACK_POSITION.x + (2 * (CardI.CardWidth + CardI.GullySize)), DECK_POS.y)
+  public static final var TABLEAU_STACK_POSITION : Point = new Point(DECK_POS.x, FOUNDATION_STACK_POSITION.y + CardI.CardHeight + CardI.GullySize)
 
   protected static var _resourceBundle : ResourceBundle
 
@@ -212,9 +212,9 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
 
   public final function InitializeFrame() {
     GameType = GameDifficulty.RANDOM
-    var cardWidthPlusGully = Card.CardWidth + Card.GullySize
+    var cardWidthPlusGully = CardI.CardWidth + CardI.GullySize
     var frameWidth = getInsets().left + 20 + (cardWidthPlusGully * TABLEAU_STACK_COUNT) + 20 + getInsets().right
-    var frameHeight = Card.CardHeight * 6
+    var frameHeight = CardI.CardHeight * 6
     setSize(Math.min(frameWidth, 1024), Math.min(frameHeight, 768))
     addWindowListener(new SolitaireWindowManager(this))
     var scrollPane = new ScrollPane(ScrollPane.SCROLLBARS_AS_NEEDED)

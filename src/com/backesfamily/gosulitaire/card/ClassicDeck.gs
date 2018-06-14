@@ -25,8 +25,8 @@ public class ClassicDeck extends Deck {
     g.drawImage(image
         , location.x
         , location.y
-        , Card.CardWidth
-        , Card.CardHeight
+        , CardI.CardWidth
+        , CardI.CardHeight
         , null)
   }
 }
