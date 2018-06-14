@@ -35,8 +35,8 @@ public abstract class Deck extends DefaultMutableStack {
   override public function paintEmptyStack(g : Graphics) {
     var loc = StackLocation
     g.setColor(Color.YELLOW)
-    g.fillRect(loc.x, loc.y, CardI.CardWidth, CardI.CardHeight)
+    g.fillRect(loc.x, loc.y, Card.CardWidth, Card.CardHeight)
     g.setColor(Color.black)
-    g.drawRect(loc.x, loc.y, CardI.CardWidth, CardI.CardHeight)
+    g.drawRect(loc.x, loc.y, Card.CardWidth, Card.CardHeight)
   }
 }

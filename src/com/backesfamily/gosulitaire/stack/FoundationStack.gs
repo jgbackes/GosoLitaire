@@ -33,8 +33,8 @@ class FoundationStack extends DefaultMutableStack {
     g.drawImage(image
         , location.x
         , location.y
-        , CardI.CardWidth
-        , CardI.CardHeight
+        , Card.CardWidth
+        , Card.CardHeight
         , null)
   }
 }

@@ -16,8 +16,8 @@ class WasteStack extends DefaultMutableStack {
     g.drawImage(wasteImage
         , location.x
         , location.y
-        , CardI.CardWidth
-        , CardI.CardHeight
+        , Card.CardWidth
+        , Card.CardHeight
         , null)
   }
 }

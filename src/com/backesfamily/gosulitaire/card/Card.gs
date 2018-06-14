@@ -5,7 +5,7 @@ uses java.awt.*
 /**
  * Created by jbackes on 6/13/18
  */
-interface CardI {
+interface Card {
   static property get CardHeight() : int {
     return 164
   }

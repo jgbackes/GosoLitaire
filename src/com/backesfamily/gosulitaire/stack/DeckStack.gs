@@ -16,8 +16,8 @@ class DeckStack extends ClassicDeck {
     g.drawImage(foundationImage
         , location.x
         , location.y
-        , CardI.CardWidth
-        , CardI.CardHeight
+        , Card.CardWidth
+        , Card.CardHeight
         , null)
   }
 }

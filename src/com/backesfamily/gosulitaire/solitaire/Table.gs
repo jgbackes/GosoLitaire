@@ -116,14 +116,14 @@ class Table extends Canvas {
       hintLocations.each(\hint -> {
         var anArrowShaft = hint.CurvedArrowShaft
         var shaftTransform = new AffineTransform()
-        shaftTransform.translate((CardI.CardWidth / 2), CardI.CardHeight + 2)
+        shaftTransform.translate((Card.CardWidth / 2), Card.CardHeight + 2)
         var anArrowhead = hint.Arrowhead
         var theta = hint.ArrowHeadTheta
         var arrowHeadTransform = new AffineTransform()
-        arrowHeadTransform.translate(hint.EndingPoint.X + (CardI.CardWidth / 2), hint.EndingPoint.Y + CardI.CardHeight)
+        arrowHeadTransform.translate(hint.EndingPoint.X + (Card.CardWidth / 2), hint.EndingPoint.Y + Card.CardHeight)
         arrowHeadTransform.rotate(theta)
         var arrowHeadShadowTransform = new AffineTransform()
-        arrowHeadShadowTransform.translate(hint.EndingPoint.X + (CardI.CardWidth / 2), hint.EndingPoint.Y + CardI.CardHeight + 2)
+        arrowHeadShadowTransform.translate(hint.EndingPoint.X + (Card.CardWidth / 2), hint.EndingPoint.Y + Card.CardHeight + 2)
         arrowHeadShadowTransform.scale(1.25d, 1.5d)
         arrowHeadShadowTransform.rotate(theta)
 

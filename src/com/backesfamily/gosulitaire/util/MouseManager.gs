@@ -66,7 +66,7 @@ class MouseManager extends MouseInputAdapter {
               var type = pathIterator.currentSegment(coordinates)
               if (type == 1 and coordinates[0] != 0.0d and coordinates[1] != 0.0d) {
                 card.Location = new Point(coordinates[0] as int
-                    , coordinates[1] as int + CardI.CardHeight / 2)
+                    , coordinates[1] as int + Card.CardHeight / 2)
 
                 _stackProvider.Table.repaint()
               }
@@ -152,7 +152,7 @@ class MouseManager extends MouseInputAdapter {
             var sourceCardLocation = _stackProvider.CurrentStack.StackLocation
             var count = _stackProvider.CurrentStack.Count
             var yLoc = sourceCardLocation.y
-            yLoc -= count == 1 ? (CardI.CardHeight / 2) : CardI.CardHeight - CardI.VerticalOffset / 2
+            yLoc -= count == 1 ? (Card.CardHeight / 2) : Card.CardHeight - Card.VerticalOffset / 2
             var point = new Point(sourceCardLocation.x, yLoc)
             _stackProvider.HintLocations.each(\hint -> {
               if (_stackProvider.CurrentStack.containsPoint(mousePoint)) {

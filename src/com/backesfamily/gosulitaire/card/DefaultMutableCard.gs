@@ -2,11 +2,11 @@ package com.backesfamily.gosulitaire.card
 
 uses java.awt.*
 
-public abstract class DefaultMutableCard implements CardI {
+public abstract class DefaultMutableCard implements Card {
 
   var _faceDown : boolean as FaceDown = false
   var _location : Point as Location = new Point(0, 0)
-  var _size : Dimension as Size = new Dimension(CardI.CardWidth, CardI.CardHeight)
+  var _size : Dimension as Size = new Dimension(Card.CardWidth, Card.CardHeight)
 
   override public abstract function paint(g : Graphics, hint : boolean) : void
 

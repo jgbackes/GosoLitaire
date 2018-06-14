@@ -41,8 +41,8 @@ class TableauStack extends DefaultMutableStack {
     g.drawImage(foundationImage
         , location.x
         , location.y
-        , CardI.CardWidth
-        , CardI.CardHeight
+        , Card.CardWidth
+        , Card.CardHeight
         , null)
   }
 }

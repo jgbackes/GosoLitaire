@@ -33,7 +33,7 @@ public class GameState {
 
     this._tableauStacks = new TableauStack[Solitaire.TABLEAU_STACK_COUNT]
     tableauStack.eachWithIndex(\stack, i -> {
-      _tableauStacks[i] = new TableauStack(Directions.SPREAD_SOUTH, CardI.VerticalOffset)
+      _tableauStacks[i] = new TableauStack(Directions.SPREAD_SOUTH, Card.VerticalOffset)
       stack.Cards.each(\card -> _tableauStacks[i].push(new ClassicCard(card as ClassicCard)))
     })
 
@@ -156,11 +156,11 @@ public class GameState {
               }
               movableCard.Legal = true
               var sourceX = sourceStack.StackLocation.x
-              var sourceY = (sourceStack.StackLocation.y - CardI.CardHeight)
-              sourceY += sourceStack.Count * CardI.VerticalOffset
-              sourceY += faceUpStack.Count == 1 ? CardI.CardHeight / 2 : CardI.VerticalOffset / 2
+              var sourceY = (sourceStack.StackLocation.y - Card.CardHeight)
+              sourceY += sourceStack.Count * Card.VerticalOffset
+              sourceY += faceUpStack.Count == 1 ? Card.CardHeight / 2 : Card.VerticalOffset / 2
               var destinationX = destinationStack.StackLocation.x
-              var destinationY = destinationStack.StackLocation.y + ((destinationStack.Count - 1) * CardI.VerticalOffset)
+              var destinationY = destinationStack.StackLocation.y + ((destinationStack.Count - 1) * Card.VerticalOffset)
               hintLocations.add(new Hint(
                   new Point(sourceX, sourceY)
                   , new Point(destinationX, destinationY)
@@ -209,7 +209,7 @@ public class GameState {
         }
         hintLocations.add(new Hint(
             new Point(movableCard.Location.x
-                , movableCard.Location.y - (CardI.CardHeight / 2))
+                , movableCard.Location.y - (Card.CardHeight / 2))
             , destinationStack.StackLocation
             , Hint.TABLEAU_TO_FOUNDATION
             , new Rectangle(movableCard.Location, movableCard.Size)
@@ -234,9 +234,9 @@ public class GameState {
             print("Legal Move " + card.Value + card.Suit + " To Tableau Stack " + tableauStack.toString())
           }
           card.Legal = true
-          var startingPoint = new Point(card.Location.x, card.Location.y - (CardI.CardHeight / 2))
+          var startingPoint = new Point(card.Location.x, card.Location.y - (Card.CardHeight / 2))
           var endingPoint = new Point(tableauStack.StackLocation.x
-              , tableauStack.StackLocation.y + ((tableauStack.Count - 1) * CardI.VerticalOffset))
+              , tableauStack.StackLocation.y + ((tableauStack.Count - 1) * Card.VerticalOffset))
           hintLocations.add(new Hint(
               startingPoint
               , endingPoint
@@ -274,8 +274,8 @@ public class GameState {
         }
         card.Legal = true
         hintLocations.add(new Hint(
-            new Point(_wasteStack.StackLocation.x, _wasteStack.StackLocation.y - (CardI.CardHeight / 2))
-            , new Point(foundationStack.StackLocation.x, foundationStack.StackLocation.y - (CardI.CardHeight / 2))
+            new Point(_wasteStack.StackLocation.x, _wasteStack.StackLocation.y - (Card.CardHeight / 2))
+            , new Point(foundationStack.StackLocation.x, foundationStack.StackLocation.y - (Card.CardHeight / 2))
             , Hint.WASTE_TO_FOUNDATION
             , new Rectangle(_wasteStack.StackLocation, card.Size)
             , _table

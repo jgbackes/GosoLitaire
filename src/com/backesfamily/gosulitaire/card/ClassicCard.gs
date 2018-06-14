@@ -109,8 +109,8 @@ public class ClassicCard extends DefaultMutableCard {
         , location.y - 4
         , Size.width + 4
         , Size.height + 4
-        , CardI.BorderArc
-        , CardI.BorderArc)
+        , Card.BorderArc
+        , Card.BorderArc)
     var oldClip = g.getClipBounds()
     g.setClip(border)
     g.setColor(java.awt.Color.white)
@@ -156,8 +156,8 @@ public class ClassicCard extends DefaultMutableCard {
         , location.y
         , Size.width - 1
         , Size.height - 1
-        , CardI.BorderArc
-        , CardI.BorderArc)
+        , Card.BorderArc
+        , Card.BorderArc)
   }
 
   public final function loadCardImages(locale : Locale) {
@@ -172,7 +172,7 @@ public class ClassicCard extends DefaultMutableCard {
   }
 
   private function loadCardImages(sprintSheetFileName : String) {
-    var spriteSheetInfo = new SpriteSheetInfo(13, 5, CardI.CardWidth, CardI.CardHeight)
+    var spriteSheetInfo = new SpriteSheetInfo(13, 5, Card.CardWidth, Card.CardHeight)
     var spriteSheet = new SpriteSheet(sprintSheetFileName, spriteSheetInfo, true)
 
     for (i in 0..|Value.values().length) {
