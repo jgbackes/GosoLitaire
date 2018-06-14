@@ -26,6 +26,14 @@ interface Card {
     return DefaultMutableCard.CardHeight / 4
   }
 
+  public property get Location() : Point
+
+  public property set Location(p: Point) : void
+
+  public property get FaceDown() : boolean
+
+  public property set FaceDown(d: boolean) : void
+
   public function paint(g : Graphics, hint : boolean) : void
 
   public function turnFaceUp() : void;

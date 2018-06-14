@@ -91,7 +91,7 @@ class MouseManager extends MouseInputAdapter {
 
   override public function mousePressed(e : MouseEvent) : void {
     if (!e.isMetaDown() and !e.isControlDown() and !e.isShiftDown()) {
-      var card : DefaultMutableCard = null
+      var card : Card = null
       var mousePoint = e.getPoint()
 
       if (_stackProvider.Deck.containsPoint(mousePoint)) {
@@ -175,8 +175,8 @@ class MouseManager extends MouseInputAdapter {
     _stackProvider.HintLocations.removeWhere(\hint -> !hint.containsPoint(p))
   }
 
-  private function getCardAtMousePoint(mousePoint : Point) : DefaultMutableCard {
-    var result : DefaultMutableCard
+  private function getCardAtMousePoint(mousePoint : Point) : Card {
+    var result : Card
     if (_stackProvider.WasteStack.NotEmpty and _stackProvider.WasteStack.Top.containsPoint(mousePoint)) {
       _sourceStack = _stackProvider.WasteStack
       result = (_sourceStack.Top)

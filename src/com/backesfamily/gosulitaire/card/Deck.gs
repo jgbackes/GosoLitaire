@@ -12,7 +12,7 @@ public abstract class Deck extends DefaultMutableStack {
   }
 
   public function shuffle(seed : int) : void {
-    var v = new Vector<DefaultMutableCard>()
+    var v = new Vector<Card>()
     while (!Empty) {
       v.addElement(pop())
     }
