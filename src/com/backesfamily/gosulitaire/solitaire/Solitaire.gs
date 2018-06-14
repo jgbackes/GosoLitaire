@@ -312,13 +312,13 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
     _foundationStacks = new FoundationStack[FOUNDATION_STACK_COUNT]
     for (i in 0..|FOUNDATION_STACK_COUNT) {
       _foundationStacks[i] = new FoundationStack(Directions.SPREAD_NONE, 0)
-      _foundationStacks[i].StackLocation = new Point(FOUNDATION_STACK_POSITION.x + i * (Card.CardWidth + 5), FOUNDATION_STACK_POSITION.y)
+      _foundationStacks[i].StackLocation = new Point(FOUNDATION_STACK_POSITION.x + i * (DefaultMutableCard.CardWidth + 5), FOUNDATION_STACK_POSITION.y)
     }
 
     _tableauStacks = new TableauStack[TABLEAU_STACK_COUNT]
     for (i in 0..|TABLEAU_STACK_COUNT) {
-      _tableauStacks[i] = new TableauStack(Directions.SPREAD_SOUTH, Card.VerticalOffset)
-      _tableauStacks[i].StackLocation = new Point(TABLEAU_STACK_POSITION.x + (i * (Card.CardWidth + 5))
+      _tableauStacks[i] = new TableauStack(Directions.SPREAD_SOUTH, DefaultMutableCard.VerticalOffset)
+      _tableauStacks[i].StackLocation = new Point(TABLEAU_STACK_POSITION.x + (i * (DefaultMutableCard.CardWidth + 5))
           , TABLEAU_STACK_POSITION.y)
     }
 

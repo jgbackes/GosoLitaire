@@ -2,7 +2,7 @@ package com.backesfamily.gosulitaire.card
 
 uses java.awt.*
 
-public abstract class Card implements CardI {
+public abstract class DefaultMutableCard implements CardI {
 
   var _faceDown : boolean as FaceDown = false
   var _location : Point as Location = new Point(0, 0)

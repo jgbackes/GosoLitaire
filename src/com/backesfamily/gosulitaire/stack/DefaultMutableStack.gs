@@ -6,7 +6,7 @@ uses java.awt.*
 
 public class DefaultMutableStack implements Stack {
 
-  private var _cards : Vector<Card>as Cards
+  private var _cards : Vector<DefaultMutableCard>as Cards
   private var _stackLocation : Point
   private var _nextCardLocation : Point as NextCardLocation = new Point(0, 0)
   private var _spreadDirection : Directions as readonly SpreadDirection
@@ -17,7 +17,7 @@ public class DefaultMutableStack implements Stack {
   }
 
   private final function InitializeStack(spreadDirection : Directions, spreadDelta : int) {
-    _cards = new Vector<Card>()
+    _cards = new Vector<DefaultMutableCard>()
     _spreadDelta = spreadDelta
     _spreadDirection = spreadDirection
     _stackLocation = new Point(0, 0)
@@ -45,7 +45,7 @@ public class DefaultMutableStack implements Stack {
     return -1
   }
 
-  override public property get Top() : Card {
+  override public property get Top() : DefaultMutableCard {
     if (Cards.size() == 0) {
       return null
     } else {
@@ -53,11 +53,11 @@ public class DefaultMutableStack implements Stack {
     }
   }
 
-  override public function elementAt(index : int) : Card {
+  override public function elementAt(index : int) : DefaultMutableCard {
     return Cards.elementAt(index)
   }
 
-  override public function push(c : Card) : void {
+  override public function push(c : DefaultMutableCard) : void {
     Cards.addElement(c)
     c.Location = NextCardLocation
     switch (SpreadDirection) {
@@ -95,7 +95,7 @@ public class DefaultMutableStack implements Stack {
     }
   }
 
-  override public function pop() : Card {
+  override public function pop() : DefaultMutableCard {
     var card = Top
     Cards.removeElement(card)
     switch (SpreadDirection) {
@@ -119,7 +119,7 @@ public class DefaultMutableStack implements Stack {
     return card
   }
 
-  override public function pop(theCard : Card) : Stack {
+  override public function pop(theCard : DefaultMutableCard) : Stack {
     var tempStack = new DefaultMutableStack(SpreadDirection, SpreadDelta)
     while (!(Top == theCard) and !Empty) {
       tempStack.push(pop())
@@ -198,9 +198,9 @@ public class DefaultMutableStack implements Stack {
     g.drawRect(loc.x, loc.y, CardI.CardWidth, CardI.CardHeight)
   }
 
-  override public function getClickedCard(p : Point) : Card {
+  override public function getClickedCard(p : Point) : DefaultMutableCard {
     var cardFound = false
-    var c : Card = null
+    var c : DefaultMutableCard = null
     var i = Cards.size() - 1
     while (!cardFound and i >= 0) {
       c = (Cards.elementAt(i))
@@ -211,7 +211,7 @@ public class DefaultMutableStack implements Stack {
   }
 
   override public function reverse() : Stack {
-    var tempCards = new Vector<Card>()
+    var tempCards = new Vector<DefaultMutableCard>()
     while (!Empty) {
       tempCards.addElement(pop())
     }

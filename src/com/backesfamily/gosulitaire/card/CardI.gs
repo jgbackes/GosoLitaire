@@ -23,7 +23,7 @@ interface CardI {
   }
 
   static property get VerticalOffset() : int {
-    return Card.CardHeight / 4
+    return DefaultMutableCard.CardHeight / 4
   }
 
   public function paint(g : Graphics, hint : boolean) : void

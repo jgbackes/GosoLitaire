@@ -7,7 +7,7 @@ uses com.backesfamily.gosulitaire.util.SpriteSheetInfo
 uses java.awt.*
 uses java.awt.geom.RoundRectangle2D
 
-public class ClassicCard extends Card {
+public class ClassicCard extends DefaultMutableCard {
   public static final var STRING_HIDDEN : String = "X"
 
   private static var _images : Hashtable<String, Image>
