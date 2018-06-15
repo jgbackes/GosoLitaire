@@ -4,7 +4,7 @@ uses com.backesfamily.gosulitaire.card.*
 
 uses java.awt.*
 
-class WasteStack extends DefaultMutableStack {
+class DiscardStack extends DefaultMutableStack {
 
   public construct(spreadDirection : Directions, spreadDelta : int) {
     super(spreadDirection, spreadDelta)

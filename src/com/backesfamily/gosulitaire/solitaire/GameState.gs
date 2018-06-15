@@ -10,7 +10,7 @@ public class GameState {
 
   protected var _gameInfo : GameInfo
   protected var _deck : ClassicDeck
-  protected var _wasteStack : WasteStack
+  protected var _wasteStack : DiscardStack
   protected var _tableauStacks : TableauStack[]
   protected var _foundationStacks : FoundationStack[]
   protected var _logLevel : LogLevel
@@ -28,7 +28,7 @@ public class GameState {
     this._deck = new ClassicDeck(Directions.SPREAD_NONE, 0)
     deck.Cards.each(\card -> _deck.push(new ClassicCard(card as ClassicCard)))
 
-    this._wasteStack = new WasteStack(Directions.SPREAD_NONE, 0)
+    this._wasteStack = new DiscardStack(Directions.SPREAD_NONE, 0)
     wasteStack.Cards.each(\card -> _wasteStack.push(new ClassicCard(card as ClassicCard)))
 
     this._tableauStacks = new TableauStack[Solitaire.TABLEAU_STACK_COUNT]
@@ -51,7 +51,7 @@ public class GameState {
 
   public construct(gameInfo : GameInfo
       , deck : ClassicDeck
-      , wasteStack : WasteStack
+      , wasteStack : DiscardStack
       , tableauStack : TableauStack[]
       , foundationStack : FoundationStack[]
       , table : Table) {
@@ -296,7 +296,7 @@ public class GameState {
     return
   }
 
-  public function restoreGameState(gameInfo : GameInfo, deck : ClassicDeck, wasteStack : WasteStack, tableauStacks : TableauStack[], foundationStacks : FoundationStack[], move : Move) : void {
+  public function restoreGameState(gameInfo : GameInfo, deck : ClassicDeck, wasteStack : DiscardStack, tableauStacks : TableauStack[], foundationStacks : FoundationStack[], move : Move) : void {
     gameInfo.Type = this._gameInfo.Type
     gameInfo.Seed = this._gameInfo.Seed
 

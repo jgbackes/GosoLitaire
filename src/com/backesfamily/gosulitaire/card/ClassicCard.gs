@@ -173,7 +173,7 @@ public class ClassicCard extends DefaultMutableCard {
   }
 
   private function loadCardImages(sprintSheetFileName : String) {
-    var spriteSheetInfo = new SpriteSheetInfo(13, 5, Card.CardWidth, Card.CardHeight)
+    var spriteSheetInfo = new SpriteSheetInfo(13, 4, Card.CardWidth, Card.CardHeight)
     var spriteSheet = new SpriteSheet(sprintSheetFileName, spriteSheetInfo, true)
 
     for (i in 0..|Value.values().length) {

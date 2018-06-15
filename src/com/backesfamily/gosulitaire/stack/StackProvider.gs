@@ -13,7 +13,7 @@ interface StackProvider {
 
   public property get Deck() : ClassicDeck
 
-  public property get WasteStack() : WasteStack
+  public property get WasteStack() : DiscardStack
 
   public property get TableauStacks() : TableauStack[]
 

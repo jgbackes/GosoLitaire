@@ -29,7 +29,7 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
 
   protected var _currentStack : Stack
   protected var _deck : ClassicDeck
-  protected var _wasteStack : WasteStack
+  protected var _wasteStack : DiscardStack
   protected var _tableauStacks : TableauStack[]
   protected var _foundationStacks : FoundationStack[]
   protected var _table : Table
@@ -306,7 +306,7 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
     _deck.shuffle(_gameInfo.Seed)
     _deck.StackLocation = new Point(DECK_POS.x, DECK_POS.y)
 
-    _wasteStack = new WasteStack(Directions.SPREAD_NONE, 0)
+    _wasteStack = new DiscardStack(Directions.SPREAD_NONE, 0)
     _wasteStack.StackLocation = new Point(WASTE_STACK_POSITION.x, WASTE_STACK_POSITION.y)
 
     _foundationStacks = new FoundationStack[FOUNDATION_STACK_COUNT]
@@ -449,7 +449,7 @@ public class Solitaire extends Frame implements StackProvider, GameLevelsProvide
     return _table
   }
 
-  override property get WasteStack() : WasteStack {
+  override property get WasteStack() : DiscardStack {
     return _wasteStack
   }
 
