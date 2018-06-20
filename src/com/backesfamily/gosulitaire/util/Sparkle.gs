@@ -1,4 +1,4 @@
-package com.backesfamily.gosulitaire.solitaire
+package com.backesfamily.gosulitaire.util
 
 uses javax.swing.*
 uses javax.swing.Timer
@@ -8,6 +8,18 @@ uses java.awt.geom.GeneralPath
 uses java.awt.geom.Path2D
 
 class Sparkle extends JComponent {
+
+  enum Speed{
+    FAST(10),
+    MEDIUM(20),
+    SLOW(40),
+
+    private var _delay: int as Delay
+
+    private construct(delay: int) {
+      _delay = delay
+    }
+  }
 
   private var _paths : ArrayList<Path2D>
   private var _script : int[][] = {{0}, {0}, {3}, {2}, {2}, {1, 6}, {1, 6}, {3, 5}, {3, 5}, {4}, {4}}
@@ -21,19 +33,23 @@ class Sparkle extends JComponent {
   private var _color : Color
 
   public construct() {
+    this(Speed.MEDIUM)
+  }
+
+  public construct(speed: Speed) {
     _xPosition = 0
     _yPosition = 0
     _scale = 0.25
     _rotation = 0
     _color = Color.YELLOW
-    _frame = 0;
+    _frame = 0
 
     initPaths()
-    initTimer()
+    initTimer(speed)
   }
 
-  private function initTimer() : void {
-    _timer = new Timer(19, \evt -> {
+  private function initTimer(speed: Speed) : void {
+    _timer = new Timer(speed.Delay, \evt -> {
       _frame++
       if (_frame >= _script.Count) {
         _frame = 0
@@ -45,7 +61,7 @@ class Sparkle extends JComponent {
       }
       repaint()
     })
-    _timer.InitialDelay = (Math.random() * 20.0) as int
+    _timer.InitialDelay = (Math.random() * speed.Delay) as int
     _timer.start()
   }
 
@@ -234,7 +250,10 @@ class Sparkle extends JComponent {
   }
 
 
-  private function doDrawing(g2d : Graphics2D) : void {
+  override public function paintComponent(g : Graphics) : void {
+    super.paintComponent(g)
+
+    var g2d = g as Graphics2D
     g2d.Color = _color
     var frames = _script[_frame]
     var oldTransform = g2d.Transform
@@ -247,10 +266,5 @@ class Sparkle extends JComponent {
       g2d.fill(_paths[pathID])
     }
     g2d.Transform = oldTransform
-  }
-
-  override public function paintComponent(g : Graphics) : void {
-    super.paintComponent(g)
-    doDrawing(g as Graphics2D)
   }
 }

@@ -8,10 +8,7 @@ public class ClassicDeck extends Deck {
 
   public construct(spreadDirection : Directions, spreadDelta : int) {
     super(spreadDirection, spreadDelta)
-    buildCards()
-  }
 
-  protected final function buildCards() : void {
     Suit.values().each(\suit -> Pips.values().each(\value -> {
       var card = new ClassicCard(value, suit)
       push(card)

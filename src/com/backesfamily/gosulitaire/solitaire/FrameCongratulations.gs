@@ -1,56 +1,54 @@
 package com.backesfamily.gosulitaire.solitaire
 
 
-uses com.backesfamily.gosulitaire.util.WindowManager
+uses com.backesfamily.gosulitaire.util.BufferedImageLoader
+uses com.backesfamily.gosulitaire.util.ImagePanel
+uses com.backesfamily.gosulitaire.util.Sparkle
 
-uses javax.imageio.ImageIO
 uses javax.swing.*
 uses java.awt.*
+uses java.awt.event.MouseAdapter
+uses java.awt.event.MouseEvent
 
 public class FrameCongratulations extends JFrame {
 
-
-  internal var _congratulations : JLabel = new JLabel()
+  var _picture = BufferedImageLoader.getBufferedImageFromRelativePathToClass("../util/Congratulations.png", getClass())
 
   public construct() {
-    Layout = new BorderLayout(0, 0)
-    Visible = false
+    Layout = new BorderLayout()
 
-    var cImage = ImageIO.read(getClass().getResource("../util/Congratulations.png"));
-    var wide = cImage.Width + 64
-    var high = cImage.Height + 64
+    // Add the sparklies
+    for (0..9) {
+      var allValues = Sparkle.Speed.AllValues.map(\speed -> speed.Name)
+      var fireWhen = Sparkle.Speed.valueOf(allValues.get(new Random().nextInt(allValues.Count)))
+      var sparkle = new Sparkle(fireWhen)
+      sparkle.setBounds(0, 0, _picture.getWidth() + 64, _picture.getHeight() + 64)
+      add(sparkle)
+    }
+
+    var message = new JLabel(new ImageIcon(_picture))
+    add(message)
+
     this.ContentPane.setBackground(Color.BLACK)
-    _congratulations.setIcon(new ImageIcon(cImage))
-    _congratulations.setHorizontalAlignment(JLabel.CENTER)
-    _congratulations.setVerticalAlignment(JLabel.CENTER)
-    _congratulations.setEnabled(true)
-    _congratulations.setBounds(0, 0, wide, high)
-    InitializeFrame(wide, high);
+
+    this.addMouseListener(new MouseAdapter() {
+      override function mouseClicked(e : MouseEvent) {
+        (e.Source as JFrame).Visible = false
+        System.exit(0)
+      }
+    })
+    Undecorated = true    // Hide the title frame of the window
+    setSize(_picture.getWidth() + 64, _picture.getHeight() + 64)
+    setLocationRelativeTo(null)     // Center on the screen
+    repaint()
   }
 
   public static function main(args : String[]) {
     var f = new FrameCongratulations()
     f.Visible = true
-  }
 
-  private final function InitializeFrame(wide : int, high : int) {
-    Undecorated = true
-    setSize(wide, high)
-    add(BorderLayout.CENTER, _congratulations)
-    addWindowListener(new WindowManager(this, WindowManager.HIDE_ON_CLOSE))
-    for (0..3) {
-      var sparkle = new Sparkle()
-      sparkle.setBounds(0, 0, wide, high)
-      add(sparkle)
+    while (true) {
+      f.repaint()
     }
-  }
-
-  override public property set Visible(b : boolean) {
-    var scrSize = getToolkit().getScreenSize()
-    var size = getSize()
-    if (b) {
-      setLocation((scrSize.width - size.width) / 2, (scrSize.height - size.height) / 2)
-    }
-    super.Visible = b
   }
 }

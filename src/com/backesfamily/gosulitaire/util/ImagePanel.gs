@@ -1,13 +1,12 @@
 package com.backesfamily.gosulitaire.util
 
+uses javax.swing.*
 uses java.awt.*
 uses java.awt.image.BufferedImage
 
-public class ImagePanel extends Panel {
+public class ImagePanel extends JPanel {
 
   private var _image : Image
-  private var _offScreenImage : Image
-  private var _offScreenGraphics : Graphics
 
   public construct() {
   }
@@ -17,7 +16,7 @@ public class ImagePanel extends Panel {
   }
 
   private function InitializePanel(image : Image) {
-    Image = image
+    _image = image
   }
 
   override public property get PreferredSize() : Dimension {
@@ -29,43 +28,13 @@ public class ImagePanel extends Panel {
     return (new Dimension(width, height))
   }
 
-  override public function setBounds(x : int, y : int, width : int, height : int) : void {
-    if (_offScreenImage != null) {
-      _offScreenGraphics.dispose()
-      _offScreenImage = null
-      _offScreenGraphics = null
-    }
-    super.setBounds(x, y, width, height)
-  }
-
-  public property set Image(image : Image) : void {
-    _image = image
-    repaint()
-  }
-
-  override public function update(g : Graphics) : void {
-    paint(g)
-  }
-
   override public function paint(g : Graphics) : void {
     super.paint(g)
-    if (_image != null) {
-      if (!prepareImage(_image, this)) {
-        var str = "Loading image..."
-        var fontMetrics = getFontMetrics(getFont())
-        var dimension = getSize()
-        var x = (dimension.width - fontMetrics.stringWidth(str)) / 2
-        var y = (dimension.height - fontMetrics.getHeight()) / 2
-        g.drawString(str, x, y)
-        return
-      }
-
-      var dimension = getSize()
-      var imageWidth = _image.getWidth(this)
-      var imageHeight = _image.getHeight(this)
-      var x = Math.max((dimension.width - imageWidth) / 2, 0)
-      var y = Math.min((dimension.height - imageHeight) / 2, 0)
-      g.drawImage(_image, x, y, this)
-    }
+    var dimension = getSize()
+    var imageWidth = _image.getWidth(this)
+    var imageHeight = _image.getHeight(this)
+    var x = Math.max((dimension.width - imageWidth) / 2, 0)
+    var y = Math.min((dimension.height - imageHeight) / 2, 0)
+    g.drawImage(_image, x, y, null)
   }
 }
