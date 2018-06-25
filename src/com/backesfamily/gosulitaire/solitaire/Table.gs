@@ -127,8 +127,8 @@ class Table extends Canvas {
         arrowHeadShadowTransform.scale(1.25d, 1.5d)
         arrowHeadShadowTransform.rotate(theta)
 
+        var opacity = 32
         for (strokeWidth in {16, 12, 8}) {
-          var opacity : int = 32
           g2d.setTransform(shaftTransform)
           g2d.setStroke(new BasicStroke(strokeWidth))
           g2d.setPaint(new Color(0, 0, 0, opacity))

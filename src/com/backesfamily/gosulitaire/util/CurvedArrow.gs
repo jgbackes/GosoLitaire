@@ -12,6 +12,8 @@ public class CurvedArrow {
   private final static var ARROWHEAD_WIDTH = 12.0d
   private final static var ARROWHEAD_VERTICAL_CONTROL = 10.0d
   private final static var ARROWHEAD_HORIZONTAL_CONTROL = 5.0d
+  private final static var KNOB_SIZE = 6.0d
+  private final static var KNOB_CENTER = KNOB_SIZE / 2.0d
 
   protected var _startingPoint : Point as StartingPoint
   protected var _endingPoint : Point as EndingPoint
@@ -28,9 +30,8 @@ public class CurvedArrow {
     var controllingX = getControllingX(_startingPoint.X, _endingPoint.X)
     var controllingY = getControllingY(_startingPoint.Y, _endingPoint.Y)
 
-    path.moveTo(_startingPoint.X, _startingPoint.Y)
-    path.append(new Ellipse2D.Double(_startingPoint.X, _startingPoint.Y, 6.0d, 6.0d), true)
-    path.moveTo(_startingPoint.X + 3.0d, _startingPoint.Y + 3.0d)
+    path.append(new Ellipse2D.Double(_startingPoint.X, _startingPoint.Y, KNOB_SIZE, KNOB_SIZE), true)
+    path.moveTo(_startingPoint.X + KNOB_CENTER, _startingPoint.Y + KNOB_CENTER)
     path.quadTo(controllingX, controllingY, _endingPoint.X, _endingPoint.Y)
 
     return path

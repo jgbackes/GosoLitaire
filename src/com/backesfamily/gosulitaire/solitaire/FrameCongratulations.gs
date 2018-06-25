@@ -18,7 +18,7 @@ public class FrameCongratulations extends JFrame {
     Layout = new BorderLayout()
 
     // Add the sparklies
-    for (0..9) {
+    for (0..3) {
       var allValues = Sparkle.Speed.AllValues.map(\speed -> speed.Name)
       var fireWhen = Sparkle.Speed.valueOf(allValues.get(new Random().nextInt(allValues.Count)))
       var sparkle = new Sparkle(fireWhen)
